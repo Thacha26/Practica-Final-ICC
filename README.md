@@ -3,7 +3,7 @@
 Se realizaron los primeros dos juegos para la parte uno de la práctica final, los juegos fuerpn:
 1. Conecta cuatro
 2. Salvados
-## Equipo #(Numero) 
+## Equipo #17 
 Frida Thais Espinosa Romero
 
 322047639
