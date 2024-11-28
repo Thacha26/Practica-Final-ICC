@@ -1,6 +1,7 @@
 /**
  * Clase del juego "Salvados", donde el jugador tiene que adivinar a quien se salvará
- * @author Equipo 17
+ * @author Espinosa Romero Frida Thais
+ * @author Carriche Arriaga Dante Raziel
  * 27 noviembre 2024 @version 5
  */
 import java.util.Scanner;
