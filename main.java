@@ -43,10 +43,24 @@ public class main{
 	    
 	    while (decision != 0 && decision != 1 && decision != 2) {
 		System.out.println(separacion);
-		System.out.println("Por favor, escoge un numero valido");
-		decision = scanner.nextInt();
+		System.out.println("Por favor, escoge un numero entre el 0 y el 2");
+		System.out.println(separacion);
+
+		while (true) {
+		try {
+		    decision = scanner.nextInt();
+		    break; 
+		} catch (InputMismatchException e) {
+		    System.out.println(separacion);
+		    System.out.println("Por favor, ingresa un número entero. Intenta de nuevo.");
+		    System.out.println(separacion);
+		    scanner.nextLine();
+		}
+	    }
+		
 		System.out.println(separacion);
 	    }
+	    
 	    if(decision == 0) {
 		System.out.println(separacion);
 		System.out.println("Muchas gracias, vuelve pronto.");
@@ -63,7 +77,6 @@ public class main{
 		    System.out.println("Has elegido Jugador contra Jugador.");
 		    System.out.println("Por favor, cuando hagas un movimiento, solo coloca la columna.");
 
-		    while (seguir) {
 			System.out.println(juego.mostrarTablero());
 			System.out.println("Jugador " + juego.jugador + ", introduce la columna:");
 
@@ -94,11 +107,16 @@ public class main{
 			    System.out.println(juego.mostrarTablero());
 			    if (resultado != ' ') {
 				System.out.println("¡Enhorabuena, el jugador " + resultado + " ha ganado!");
+				seguir = false;
 			    } else {
 				System.out.println("El tablero se ha llenado, es un empate.");
+				seguir = false;
 			    }
-			    seguir = false;
+			    
 			}
+
+			juego.cambiarColor();
+			
 			break;
 
 		    case 2:
@@ -108,12 +126,15 @@ public class main{
 			System.out.println("Por favor, cuando hagas un movimiento, solo coloca la columna.");
 
 			System.out.println(juego.mostrarTablero());
+			
 			if(juego.jugador == 'X'){
 			    System.out.println("Turno de la computadora");
 			    juego.versusComputadora();
 			    System.out.println(separacion);
+			    
 			} else {
-			
+
+			    System.out.println("Jugador " + juego.jugador + ", introduce la columna:");
 			    while (true){
 				try {
 				    col = scanner.nextInt();
@@ -136,22 +157,24 @@ public class main{
 			}
 
 			if(juego.finJuego()) {
-			    System.out.println(juego.mostrarTablero());
 			    resultado = juego.ganador();
+			    System.out.println(juego.mostrarTablero());
 			    if(resultado != ' '){
 				System.out.println("En hora buena, el jugador "+ juego.ganador()  +" a ganado");
 				System.out.println(separacion);
+				juego.cambiarColor();
+				seguir = false;
 			    } else {
 				System.out.println("El tablero se ha llenado, es un empate");
+				juego.cambiarColor();
+				seguir = false;
 			    }
 			}
-			seguir = false;
 			break; 
-		
-		    default:
-			System.out.println("Por favor escoge una opcion valida, ya sea el 1, 2 o 3.");
 
-		    }		    
+		    // En caso de que se coloque un numero no valido
+		    default:
+			System.out.println("Por favor escoge una opcion valida, ya sea el 1, 2 o 0.");
 		}
 	    }
 	    
@@ -193,8 +216,7 @@ public class main{
 			System.out.println(separacion);
 			scanner.nextLine();
 		    }
-		}
-		
+		}		
 	    }
 
 	    if(decision == 2) {
