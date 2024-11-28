@@ -1,5 +1,5 @@
 # Introducción a las Ciencias de la Computación
-## Práctica07
+## Práctica Final pt 1.
 Se realizaron los primeros dos juegos para la parte uno de la práctica final, los juegos fuerpn:
 1. Conecta cuatro
 2. Salvados
