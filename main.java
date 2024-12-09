@@ -32,7 +32,7 @@ public class main{
 	    while (true) {
 		try {
 		    decision = scanner.nextInt();
-		    break; 
+		    break;
 		} catch (InputMismatchException e) {
 		    System.out.println(separacion);
 		    System.out.println("Por favor, ingresa un número entero. Intenta de nuevo.");

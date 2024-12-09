@@ -51,24 +51,20 @@ public class cuadradoMagico {
     //* Que cheque que sea un numero entre 1-16
 
     public boolean colocar(int col, int fil, int num) {
-	if(col >= 0 && col <= 4 && fil >= 0 && fil <= 4) {
+	if(col >= 0 && col <= 3 && fil >= 0 && fil <= 3) {
 	    if(cuadrado[col][fil] == 0){
 		if(num >= 1 && num <= 16) {
 		    for(int i = 0; i < cuadrado.length; i++) {
 			for(int j = 0; j < cuadrado[i].length; j++) {
-			    if(cuadrado[i][j] != num) {
-				cuadrado[col][fil] = num;
-				return true;
-			    } else {
-				return false;
+			    if(cuadrado[i][j] == num){
+			        return false;
 			    }
 			}
 		    }
-		    return false;
+		    cuadrado[col][fil] = num;
+		    return true;
 		}
-		return false;
 	    }
-	    return false;
 	}
 	return false;
     }
@@ -79,22 +75,23 @@ public class cuadradoMagico {
     //Metodo que llene una columna fila o diagonal con la cual se inicia el juego
     public void colocarAleatorio() {
 	Random random = new Random();
-	int decision = random.nextInt(10);
-	/*Checar que no genere numeros repetidos con el colocar*/
+	
+	int decision = random.nextInt(9);
+	
 	int posicion1 = random.nextInt(15) + 1;
 	int posicion2 = random.nextInt(15) + 1;
 	int posicion3 = random.nextInt(15) + 1;
 	int posicion4 = random.nextInt(15) + 1;
-
-	while(posicion1 + posicion2 + posicion3 + posicion4 != 34 && posicion1 == posicion2 && posicion2 == posicion3 && posicion3 == posicion4) {
-	    posicion1 = random.nextInt(15) + 1;
-	    posicion2 = random.nextInt(15) + 1;
-	    posicion3 = random.nextInt(15) + 1;
-	    posicion4 = random.nextInt(15) + 1;
+	
+        //Restriccion para checar que no genere ni numeros repetidos y que su suma sea 34
+	while(posicion1 + posicion2 + posicion3 + posicion4 != 34 || posicion1 == posicion2 || posicion1 == posicion3 || posicion1 == posicion4 || posicion2 == posicion1 || posicion2 == posicion3 || posicion2 == posicion4 || posicion3 == posicion4){
+		posicion1 = random.nextInt(15) + 1;
+		posicion2 = random.nextInt(15) + 1;
+		posicion3 = random.nextInt(15) + 1;
+		posicion4 = random.nextInt(15) + 1;
 	}
 	
 	switch(decision) {
-
 	    //Para primer vertical 1 0 0 0
 	case 0:
 	    cuadrado[0][0] = posicion1;
@@ -112,7 +109,7 @@ public class cuadradoMagico {
 	    break;
 
 	    //Para tercer vertical 0 0 1 0 
-	case 3:
+	case 2:
 	    cuadrado[2][0] = posicion1;
 	    cuadrado[2][1] = posicion2;
 	    cuadrado[2][2] = posicion3;
@@ -120,14 +117,15 @@ public class cuadradoMagico {
 	    break;
 
 	    //Para la cuarta vertical 0 0 0 1
-	case 4:
+	case 3:
 	    cuadrado[3][0] = posicion1;
 	    cuadrado[3][1] = posicion2;
 	    cuadrado[3][2] = posicion3;
 	    cuadrado[3][3] = posicion4;
+	    break;
 
 	    //Para primer horizontal 1 0 0 0 
-	case 5:
+	case 4:
 	    cuadrado[0][0] = posicion1;
 	    cuadrado[1][0] = posicion2;
 	    cuadrado[2][0] = posicion3;
@@ -135,7 +133,7 @@ public class cuadradoMagico {
 	    break;
 
 	    //Para segunda horizontal 0 1 0 0
-	case 6:
+	case 5:
 	    cuadrado[1][0] = posicion1;
 	    cuadrado[1][1] = posicion2;
 	    cuadrado[1][2] = posicion3;
@@ -143,22 +141,23 @@ public class cuadradoMagico {
 	    break;
 
 	    //Para tercer horizontal 0 0 1 0
-	case 7:
+	case 6:
 	    cuadrado[2][0] = posicion1;
 	    cuadrado[2][1] = posicion2;
-	    cuadrado[2][2] = posicion2;
+	    cuadrado[2][2] = posicion3;
 	    cuadrado[2][3] = posicion4;
 	    break;
 
 	    //Para cuarta horizontal 0 0 0 1
-	case 8:
+	case 7:
 	    cuadrado[3][0] = posicion1;
 	    cuadrado[3][1] = posicion2;
 	    cuadrado[3][2] = posicion3;
 	    cuadrado[3][3] = posicion4;
+	    break;
 
 	    //Para primer diagonal /
-	case 9:
+	case 8:
 	    cuadrado[0][0] = posicion1;
 	    cuadrado[1][1] = posicion2;
 	    cuadrado[2][2] = posicion3;
@@ -166,10 +165,10 @@ public class cuadradoMagico {
 	    break;
 
 	    //Para segunda diagonal \
-	case 10:
+	case 9:
 	    cuadrado[0][3] = posicion1;
 	    cuadrado[1][2] = posicion2;
-	    cuadrado[2][1] = posicion1;
+	    cuadrado[2][1] = posicion3;
 	    cuadrado[3][0] = posicion4;
 	    break; 	    
 	}
@@ -271,5 +270,24 @@ public class cuadradoMagico {
 	    }
 	}
 	return false;
+    }
+
+    public boolean tableroLLeno() {
+	for(int i = 0; i < cuadrado.length; i++){
+	    for(int j = 0; j < cuadrado[i].length; j++){
+		if(cuadrado[i][j] == 0){
+		    return false;
+		}
+	    }
+	}
+	return true;
+    }
+
+    public void limpiar() {
+	for(int i = 0; i < cuadrado.length; i++) {
+	    for(int j = 0; j < cuadrado[i].length; j++){
+		cuadrado[i][j] = 0;
+	    }
+	}
     }
 }
