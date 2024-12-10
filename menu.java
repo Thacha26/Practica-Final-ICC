@@ -6,7 +6,7 @@ Informarle que durante los dos dias solo tiene 100 creditos
 
 (El juego no dice cuantos puntos debe de regresar cada juego)
 
-********Lo siguiente se hace con serializacion y desserializacion*******
+ ********Lo siguiente se hace con serializacion y desserializacion*******
 
 El programa debe iniciar mostrando un menu con las siguientes opciones.
 
@@ -38,11 +38,30 @@ Sino tiene creditos suficientes pues decirle que se chingo
 
   De momento, solo diseñare un menu basico con las opciones, y de apoco ire implementado las demas especificaciones y las exceptions 
 
- */
+  Para que el menu funcione, se me ocurre hacer una clase jugador, que contenga los puntos, creditos y nombre, y ahi hacer metodos como obtener creditos nombre y asi, ademas de un toString, para en el menu con las opciones de obtener puntaje y asi, serializar y deserializar los objetos y asi comparar o hacer lo necesario, lo que no tengo del todo claro es como se podria deserializar y buscar su nombre dentro de todo el archivo para obtener sus puntos o algo asi
+  /*Ya se como hacerlo jasjasjsa, se me habia olvidado que cuando deserializas, haces la conversion directa a un objeto, y osea, segun yo, como ya vas a hacer la conversion directa, pues puedes usar metodos de ese objeto, entonces todo recairia en hacer metodos como obtener los 3 mejores, u obtener puntaje y cosas asi y eso implementarlos con las opciones del menu */
+/*Clase jugador(Por decidir)
+*Atributos *
+*Nombre 
+*Creditos
+*Puntos 
+
+*Metodos *
+*Obtener nombre, creditos y Puntos 
+*Obtener los mejores 3 
+*Obtener los primeros 3 en acabar un juego 
+*Entrada a un juego(Que cheque si hay creditos suficientes para entrar a un juego)
+*Cobro(Que cobre la entrada a un juego)
+*Agregar puntos(Que cuando acabe un programa sume los puntos)
+*equals
+*toString*/
+
+import java.io.*;
 import java.util.Scanner;
 
 public class menu{
     public static void main(String[] args){
+	File archivo = new File("jugadores.txt");
 	Scanner scanner = new Scanner(System.in);
 	int decision;
 	int juego;
@@ -109,6 +128,14 @@ public class menu{
 		nombre = scanner.nextLine();
 		
 	        //Que aqui siga el codigo con serializacion
+
+		if(archivo.exists()){
+		    if(archivo.length() == 0){
+			//Serializar directo el archivo, darle 0 puntos, 100 creditos y registrar su nombre  
+		    } else {
+			//Verificar si el nombre ya esta registrado, si si, pues namas devolver el numero de creditos
+		    }
+		}
 		
 		break;
 
