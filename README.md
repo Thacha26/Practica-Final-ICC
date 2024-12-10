@@ -1,5 +1,5 @@
 # Introducción a las Ciencias de la Computación
-##Contexto
+## Contexto
 Esta práctca final se dividió en pt 1, y pt 2.
 Se puede jugar individualmente cada juego, o ingresar desde el menú principal, donde se podrá seleccionar desde ahí el juego que el usuario prefiera.
 
