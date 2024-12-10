@@ -35,8 +35,8 @@ https://github.com/Thacha26/Practica-Final-ICC.git
 
 ```bash
 Para poder jugar conecta cuatro, se deberá de escribir en la terminal
-javac conecta4.java
-java conecta4
+javac main.java
+java main
 Y después seguir las instrucciones que aparezcan
 ```
 ```bash
