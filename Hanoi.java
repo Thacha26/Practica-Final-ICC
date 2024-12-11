@@ -1,3 +1,10 @@
+/**
+ * Clase del juego "Hanoi" EL jugador debe de mover los discos correctamente
+ * @author Espinosa Romero Frida Thais
+ * @author Carriche Arriaga Dante Raziel
+ * 11 Diciembre 2024 @version 8
+ */
+
 import java.util.Scanner;
 
 public class Hanoi {
