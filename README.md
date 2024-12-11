@@ -51,3 +51,9 @@ javac mainCuadradoMagico.java
 java mainCuadradoMagico
 Y después seguir las instrucciones que aparezcan
 ```
+```bash
+Para jugar Torres de Hanoi, se deberá de escribir en la terminal:
+javac mainHanoi.java
+java mainHanoi
+Y después seguir las instrucciones que aparezcan
+```
