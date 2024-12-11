@@ -43,7 +43,7 @@ public class mainHanoi {
                         opcionValida = true;
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("¡Error! Solo se aceptan números. Intenta de nuevo.");
+                    System.out.println("UY! Error! Solo se aceptan números intenta de nuez");
                 }
             }
 
@@ -71,7 +71,7 @@ public class mainHanoi {
                                     System.out.println("Recuerda, solo tienes que seleccionar 1 o 2");
                                 }
                             } catch (NumberFormatException e) {
-                                System.out.println("¡Error! Solo se aceptan números. Intenta de nuevo.");
+                                System.out.println("UY! Error! Solo se aceptan números vas de nuez");
                             }
                         }
 
