@@ -12,7 +12,10 @@ public class menu {
         int decision;
         int juego;
         int dia;
+<<<<<<< HEAD
 		int posicion = -1;
+=======
+>>>>>>> bd22118 (Ya se pueden jugar todos los juegos desde el menu)
         String nombre;
         boolean seguir = true;
         String cadena = "**************************************************************************";
@@ -150,6 +153,7 @@ public class menu {
                         for (int i = 0; i < players.length; i++) {
                             if (players[i] == null) {
                                 players[i] = new jugador(nombre);
+<<<<<<< HEAD
 
                                 jugadorActual = players[i];
 
@@ -461,6 +465,180 @@ public class menu {
                     }
                     break;
 
+=======
+
+                                jugadorActual = players[i];
+
+                                System.out.println(nombre + " felicidades, has sido registrado, tienes un total de 100 créditos");
+                                espacioDisp = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    ObjectOutputStream archivo2 = null;
+                    try {
+                        archivo2 = new ObjectOutputStream(new FileOutputStream("jugadores.txt"));
+                        archivo2.writeObject(players);
+                    } catch (IOException e) {
+                        System.out.println("Error al guardar los datos: " + e.getMessage());
+                    } finally {
+                        if (archivo2 != null) {
+                            try {
+                                archivo2.close();
+                            } catch (IOException e) {
+                                System.out.println("Error al cerrar el archivo: " + e.getMessage());
+                            }
+                        }
+                    }
+                    break;
+
+                // Iniciar un juego
+                case 2:
+                    if (jugadorActual == null) {
+                        System.out.println("Por favor, regístrate primero.");
+                        break;
+                    }
+
+                    System.out.println(cadena);
+                    if (dia == 1) {
+                        System.out.println("¿Qué juego deseas jugar?");
+                        System.out.println(cadena);
+                        System.out.println("1. Cuadrado Mágico");
+                        System.out.println("2. Conecta 4");
+
+                        while (true) {
+                            try {
+                                juego = scanner.nextInt();
+                                break;
+                            } catch (InputMismatchException e) {
+                                System.out.println(cadena);
+                                System.out.println("Por favor, ingresa un número entero. Intenta de nuevo.");
+                                System.out.println(cadena);
+                                scanner.nextLine();
+                            }
+                        }
+
+                        while (juego != 1 && juego != 2) {
+                            System.out.println(cadena);
+                            System.out.println("Por favor, escoge una opción válida");
+                            System.out.println(cadena);
+
+                            while (true) {
+                                try {
+                                    juego = scanner.nextInt();
+                                    break;
+                                } catch (InputMismatchException e) {
+                                    System.out.println(cadena);
+                                    System.out.println("Por favor, ingresa un número entero. Intenta de nuevo.");
+                                    System.out.println(cadena);
+                                    scanner.nextLine();
+                                }
+                            }
+                        }
+
+                        if (!jugadorActual.suficientesCreditos()) {
+                            System.out.println(cadena);
+                            System.out.println("Lo siento, no tienes créditos para jugar algún juego");
+                            System.out.println(cadena);
+                        } else {
+                            jugadorActual.cobro();
+                            System.out.println(cadena);
+                            System.out.println("Disfruta tu juego :)");
+                            System.out.println(cadena);
+                        }
+
+                        // Juegos del día 1
+                        switch (juego) {
+                            // Caso 1: Cuadrado Mágico
+                            case 1:
+                                CuadradoMagico juegoCuadradoMagico = new CuadradoMagico();
+                                juegoCuadradoMagico.colocarAleatorio();
+                                System.out.println(juegoCuadradoMagico.mostrarTablero());
+                                boolean juegoTerminado = false;
+                                while (!juegoTerminado) {
+                                    System.out.println("¿Dónde quieres colocar el número? (Fila, Columna, Número)");
+                                    int fila = scanner.nextInt();
+                                    int columna = scanner.nextInt();
+                                    int numero = scanner.nextInt();
+
+                                    if (juegoCuadradoMagico.colocar(columna, fila, numero)) {
+                                        System.out.println(juegoCuadradoMagico.mostrarTablero());
+                                    } else {
+                                        System.out.println("Movimiento inválido. Intenta de nuevo.");
+                                    }
+
+                                    System.out.println("\nHas ganado " + jugadorActual.obtenerPuntos() + "\nTus puntos actuales son: " + jugadorActual.obtenerPuntos());
+                                    juegoTerminado = true;
+                                }
+                                break;
+
+                            // Caso 2: Conecta 4
+                            case 2:
+                                conecta4 juegoConecta4 = new conecta4();
+
+                                System.out.println(juegoConecta4.mostrarTablero());
+
+                                boolean juegoTerminadoConecta4 = false;
+
+                                while (!juegoTerminadoConecta4) {
+                                    System.out.println("Es el turno del jugador " + (juegoConecta4.jugador == 'O' ? "O" : "X"));
+                                    System.out.println("Elige una columna (0-6) para colocar tu ficha:");
+
+                                    int columna = scanner.nextInt();
+
+                                    if (juegoConecta4.colocar(columna)) {
+                                        System.out.println(juegoConecta4.mostrarTablero());
+                                    } else {
+                                        System.out.println("Movimiento inválido. Intenta de nuevo.");
+                                        continue;
+                                    }
+
+                                    char ganador = juegoConecta4.ganador();
+                                    if (ganador != ' ') {
+                                        if (ganador == 'O') {
+                                            System.out.println("¡El jugador O ha ganado!");
+                                        } else {
+                                            System.out.println("¡El jugador X ha ganado!");
+                                        }
+                                        juegoTerminadoConecta4 = true;
+                                    }
+
+                                    if (juegoConecta4.finJuego()) {
+                                        System.out.println("El juego terminó en empate.");
+                                        juegoTerminadoConecta4 = true;
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                    break;
+
+                // Ver mejores 3 puntajes
+                case 3:
+                    if (players[2] == null) {
+                        System.out.println(cadena);
+                        System.out.println("No puedes ver los mejores 3 jugadores porque no hay jugadores suficientes.");
+                        System.out.println(cadena);
+                    } else {
+                        System.out.println(cadena);
+                        jugador.mejores3(players);
+                        System.out.println(cadena);
+                    }
+                    break;
+
+                // Ver puntos actuales
+                case 4:
+                    if (jugadorActual == null) {
+                        System.out.println("Por favor, regístrate primero.");
+                    } else {
+                        System.out.println(cadena);
+                        System.out.println("Tus puntos actuales son: " + jugadorActual.obtenerPuntos());
+                        System.out.println(cadena);
+                    }
+                    break;
+
+>>>>>>> bd22118 (Ya se pueden jugar todos los juegos desde el menu)
                 // Guardar y salir
                 case 5:
                     seguir = false;
