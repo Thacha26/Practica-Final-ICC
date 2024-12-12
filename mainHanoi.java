@@ -33,8 +33,8 @@ public class mainHanoi {
                 try {
                     System.out.print("Selecciona una opción: ");
                     opcion = Integer.parseInt(sc.nextLine());
-                    if (opcion < 1 || opcion > 5) {
-                        System.out.println("Opción inválida, solo puedes ingresar números (1-5).");
+                    if (opcion < 1 || opcion > 4) {
+                        System.out.println("Opción inválida, solo puedes ingresar números (1-4).");
                     } else { //Solo se puede seleccionar una opción dentro del rango
                         opcionValida = true;
                     }
