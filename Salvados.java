@@ -10,7 +10,8 @@ public class Salvados {
     protected String nombredelJugador;
     protected int puntos;
     String separador = "..............................................";
-
+    jugador jugadorActual;
+        
     /**
      * Constructor para inicializar nombre y puntos, puntos se inicializa en 0
      *
@@ -20,8 +21,8 @@ public class Salvados {
     public Salvados(String nombredelJugador) {
         this.nombredelJugador = nombredelJugador;
         this.puntos = 0;
+        this.jugadorActual = new jugador(nombredelJugador);  // Inicializar jugadorActual
     }
-
     // Se eliminan a las personas
     public void jugar() {
         Scanner scanner = new Scanner(System.in);
@@ -87,11 +88,15 @@ public class Salvados {
         System.out.println(separador);
         if (adivina == ultimaSilla) {
             System.out.println("¡SIIIIIIII. Correcto! La persona que se sobrevive es la de la silla número: " + ultimaSilla);
-            puntos = 12;  // Si adivina se le dan 12 pts
+            int agregarPuntos = 12;
+			jugadorActual.agregarPuntos(agregarPuntos);
         } else {
             System.out.println("¡NOOOOOOOOOOO. Incorrecto! La persona que se sobrevive es la de la silla número: " + ultimaSilla);
-            puntos = 2; // Sino adivina se le dan 2 pts
+            int agregarPuntos = 2;
+			jugadorActual.agregarPuntos(agregarPuntos);
         }
+        System.out.println("¡Has ganado " + jugadorActual.obtenerPuntos() + " puntos!");
+System.out.println("Tus puntos actuales son: " + jugadorActual.obtenerPuntos());
 
         // Se muestran los puntos y su posición
         consultarPosicion();
@@ -101,7 +106,7 @@ public class Salvados {
          * Muestra la posición del jugador
          */
         public void consultarPosicion() {
-            System.out.println("El jugador " + nombredelJugador + " tiene " + puntos + " puntotes.");
+            System.out.println("El jugador " + nombredelJugador);
             System.out.println(separador);
         }
 

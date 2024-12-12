@@ -22,7 +22,7 @@ public class menu {
         System.out.println(cadena);
         System.out.println("1. Día uno");
         System.out.println("2. Día dos");
-		System.out.println("3. Día tre");
+		System.out.println("3. Quieros salir");
         System.out.println(cadena);
 
 
@@ -331,7 +331,7 @@ public class menu {
 							//Torres de hanoi
 						   
 						case 2: // Torres de Hanoi
-							Hanoi seguirJugando = new Hanoi();
+							Hanoi seguirJugando = new Hanoi("\n");
 							mainHanoi.main(new String[]{});
 							System.out.println("\n Has ganado " + jugadorActual.obtenerPuntos() + " \n Tus puntos actuales son: " + jugadorActual.obtenerPuntos() + "\n Ya solo tienes" + jugadorActual.obtenerCreditos() + "créditos");
 							

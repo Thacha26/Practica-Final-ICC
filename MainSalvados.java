@@ -9,7 +9,7 @@ public class MainSalvados {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String separador = "....................................................";
-
+        
         System.out.println(separador);
         System.out.println("Bienvenido al juego de SALVADOS! Por favor, selecciona una opción");
         boolean seguirJugando = true;
