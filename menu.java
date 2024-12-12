@@ -12,6 +12,7 @@ public class menu {
         int decision;
         int juego;
         int dia;
+		int posicion = -1;
         String nombre;
         boolean seguir = true;
         String cadena = "**************************************************************************";
@@ -253,6 +254,15 @@ public class menu {
 
                                     System.out.println("\nHas ganado " + jugadorActual.obtenerPuntos() + "\nTus puntos actuales son: " + jugadorActual.obtenerPuntos());
                                     juegoTerminado = true;
+									for (int i = 0; i < players.length; i++) {
+										if (players[i] != null && players[i].obtenerNombre().equalsIgnoreCase(jugadorActual.obtenerNombre())) {
+											posicion = i + 1;
+											break;
+										}
+									}
+									
+									// Muestra la posición
+									System.out.println("¡Felicidades! Has quedado en la posición " + posicion + " con " + jugadorActual.obtenerPuntos() + " puntos.");
                                 }
                                 break;
 
@@ -291,6 +301,16 @@ public class menu {
                                         System.out.println("El juego terminó en empate.");
                                         juegoTerminadoConecta4 = true;
                                     }
+									 
+									for (int i = 0; i < players.length; i++) {
+										if (players[i] != null && players[i].obtenerNombre().equalsIgnoreCase(jugadorActual.obtenerNombre())) {
+											posicion = i + 1;
+											break;
+										}
+									}
+									
+									// Muestra la posición
+									System.out.println("¡Felicidades! Has quedado en la posición " + posicion + " con " + jugadorActual.obtenerPuntos() + " puntos.");
                                 }
                                 break;
                         }
@@ -338,7 +358,6 @@ public class menu {
 						jugadorActual.cobro();
 						System.out.println("Disfruta tu juego :).");
 						}
-						int posicion = -1;
 
 						//Juegos del dia dos
 						switch(juego){
