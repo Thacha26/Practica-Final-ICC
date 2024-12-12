@@ -80,7 +80,6 @@ public class MainSalvados {
             }
         }
         
-        sc.close();
     }
 
             // Método para imprimir las reglas para el jugador
