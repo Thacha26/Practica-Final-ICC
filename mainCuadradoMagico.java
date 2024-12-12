@@ -18,7 +18,9 @@ public class mainCuadradoMagico {
 	int num;
 	int decision;
 	boolean seguir = true;
-
+	String nombreJugador = scanner.nextLine();
+    jugador jugadorActual = new jugador(nombreJugador);  // Crear objeto jugador
+        
 	System.out.println(separacion);
 	System.out.println("Hola y bienvenido a este increible juego llamado cuadrado magico");
 	System.out.println(separacion);
@@ -179,12 +181,16 @@ public class mainCuadradoMagico {
 			System.out.println(separacion);
 			System.out.println("Felicidades, has ganado");
 			System.out.println(separacion);
+			int agregarPuntos = 10;
+			jugadorActual.agregarPuntos(agregarPuntos);
 		    } else {
 			System.out.println(separacion);
 			System.out.println(juego.mostrarTablero());
 			System.out.println(separacion);
 			System.out.println("Con los numeros que colocaste, ya no es posible ganar.");
 			System.out.println(separacion);
+			int agregarPuntos = 2;
+			jugadorActual.agregarPuntos(agregarPuntos);
 		    }
 		    
 		    System.out.println(separacion);
