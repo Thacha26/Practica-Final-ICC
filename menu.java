@@ -60,7 +60,7 @@ public class menu{
 
 	while(seguir){
 	    System.out.println(cadena);
-	    System.out.println("                                  MENU");
+	    System.out.println("------ MENU ------");
 	    System.out.println(cadena);   
 	
 	    System.out.println(cadena);
@@ -248,12 +248,15 @@ public class menu{
 
 			//Cuadrado Magico 
 		    case 1:
-
+			CuadradoMagico juegocuadradoMagico = new CuadradoMagico();
+			juegocuadradoMagico.colocarAleatorio();  // Coloca números aleatorios en el tablero
+			System.out.println(juegocuadradoMagico.mostrarTablero());  // Muestra el tablero
 			break;
 
 			//Conecta 4
 		    case 2:
 			break;
+			
 		    }
 		     
 		} else {
@@ -308,13 +311,18 @@ public class menu{
 			break;
 
 			//Torres de hanoi
-		    case 2:
+		   
+		case 2: // Torres de Hanoi
+			Hanoi seguirJugando = new Hanoi("\n");
+			seguirJugando.jugar();  // Aquí se inicia el juego de Torres de Hanoi
+
+			System.out.println("\n Has ganado " + jugadorActual.obtenerPuntos() + " \n Tus puntos actuales son: " + jugadorActual.obtenerPuntos());
 			
 			break;
-		    }		    
-		}
-		
-		break;
+		} 
+	}
+
+			
 
 		//Mejores 3 puntajes
 	    case 3:
