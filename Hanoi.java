@@ -53,7 +53,7 @@ public class Hanoi {
             if (inicio == 4) { //Sie el usuario selecciona el número 4 sale del juego y regresa al menú principal
                 System.out.println("Terminaste el juego, see ya'");
                 System.out.println("............................................");
-                System.out.println("\n Hola otra vez, regresaste al menú principal :) ");
+                System.out.println("\n Hola otra vez, vas a regresar al menú principal :) ");
                 break; //Se cierre el bucle del while y permita al usuario regresar al menú, si no, no puede salir nunca
             }
 
@@ -88,7 +88,7 @@ public class Hanoi {
                 if (seleccion >= 1 && seleccion <= 4) {
                     return seleccion; // Retorna el número del poste si es válido.
                 } else {
-                    System.out.println("Solo puedes seleccionar un número a la vez y que esté entre 1 y 3, o 4 para salir");
+                    System.out.println("Solo puedes seleccionar un número a la vez y que esté entre 1 y 3, o en su defecto 4 para salir");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("UY!, Error, trata de nuevo. Debes ingresar un número.");
