@@ -13,9 +13,13 @@ public class menu {
         int juego;
         int dia;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int posicion = -1;
 =======
 >>>>>>> bd22118 (Ya se pueden jugar todos los juegos desde el menu)
+=======
+		int posicion = -1;
+>>>>>>> 2a79eb2 (Se suben las modificaciones del menu, ya se pueden jugar todos los juegos y muestra la posición)
         String nombre;
         boolean seguir = true;
         String cadena = "**************************************************************************";
@@ -570,6 +574,15 @@ public class menu {
 
                                     System.out.println("\nHas ganado " + jugadorActual.obtenerPuntos() + "\nTus puntos actuales son: " + jugadorActual.obtenerPuntos());
                                     juegoTerminado = true;
+									for (int i = 0; i < players.length; i++) {
+										if (players[i] != null && players[i].obtenerNombre().equalsIgnoreCase(jugadorActual.obtenerNombre())) {
+											posicion = i + 1;
+											break;
+										}
+									}
+									
+									// Muestra la posición
+									System.out.println("¡Felicidades! Has quedado en la posición " + posicion + " con " + jugadorActual.obtenerPuntos() + " puntos.");
                                 }
                                 break;
 
@@ -608,11 +621,111 @@ public class menu {
                                         System.out.println("El juego terminó en empate.");
                                         juegoTerminadoConecta4 = true;
                                     }
+									 
+									for (int i = 0; i < players.length; i++) {
+										if (players[i] != null && players[i].obtenerNombre().equalsIgnoreCase(jugadorActual.obtenerNombre())) {
+											posicion = i + 1;
+											break;
+										}
+									}
+									
+									// Muestra la posición
+									System.out.println("¡Felicidades! Has quedado en la posición " + posicion + " con " + jugadorActual.obtenerPuntos() + " puntos.");
                                 }
                                 break;
                         }
+<<<<<<< HEAD
                     }
                     break;
+=======
+
+
+					} else {
+						System.out.println("Que juego deseeas jugar?");
+						System.out.println("1.Salvado");
+						System.out.println("2.Torres de Hanoi");
+			
+						while(true){
+						try{
+							juego = scanner.nextInt();
+							break;
+						} catch(InputMismatchException e){
+							System.out.println(cadena);
+							System.out.println("Por favor, ingresa un número entero. Intenta de nuevo.");
+							System.out.println(cadena);
+							scanner.nextLine();
+						}
+						}
+						
+						while(juego != 1 && juego !=2){
+						System.out.println(cadena);
+						System.out.println("Por favor, escoge una opcion valida");
+						System.out.println(cadena);
+			
+						while(true){
+							try{
+							juego = scanner.nextInt();
+							break;
+							} catch(InputMismatchException e){
+							System.out.println(cadena);
+							System.out.println("Por favor, ingresa un número entero. Intenta de nuevo.");
+							System.out.println(cadena);
+							scanner.nextLine();
+							}
+						}
+						
+						}
+			
+						if(!jugadorActual.suficientesCreditos()){
+						System.out.println("Lo siento, no tienes creditos para jugar algun juego");
+						} else {
+						jugadorActual.cobro();
+						System.out.println("Disfruta tu juego :).");
+						}
+
+						//Juegos del dia dos
+						switch(juego){
+							case 1:
+							Salvados juegoSalvados = new Salvados(jugadorActual.obtenerNombre());
+							   juegoSalvados.jugar();  // Aquí el jugador juega el juego de "Salvados"
+					
+							System.out.println("\n Has ganado " + jugadorActual.obtenerPuntos() + " \n Tus puntos actuales son: " + jugadorActual.obtenerPuntos());
+				
+							for (int i = 0; i < players.length; i++) {
+								if (players[i] != null && players[i].obtenerNombre().equalsIgnoreCase(jugadorActual.obtenerNombre())) {
+									posicion = i + 1;
+									break;
+								}
+							}
+							
+							// Muestra la posición
+							System.out.println("¡Felicidades! Has quedado en la posición " + posicion + " con " + jugadorActual.obtenerPuntos() + " puntos.");
+						
+						break;
+				
+							//Torres de hanoi
+						   
+						case 2: // Torres de Hanoi
+							Hanoi seguirJugando = new Hanoi("\n");
+							seguirJugando.jugar();  // Aquí se inicia el juego de Torres de Hanoi
+				
+							System.out.println("\n Has ganado " + jugadorActual.obtenerPuntos() + " \n Tus puntos actuales son: " + jugadorActual.obtenerPuntos());
+							
+							for (int i = 0; i < players.length; i++) {
+								if (players[i] != null && players[i].obtenerNombre().equalsIgnoreCase(jugadorActual.obtenerNombre())) {
+									posicion = i + 1;
+									break;
+								}
+							}
+							
+							// Muestra la posición
+							System.out.println("¡Felicidades! Has quedado en la posición " + posicion + " con " + jugadorActual.obtenerPuntos() + " puntos.");
+							
+						} 
+						break;
+					}
+						
+>>>>>>> c86bbc5 (Se suben las modificaciones del menu, ya se pueden jugar todos los juegos y muestra la posición)
 
                 // Ver mejores 3 puntajes
                 case 3:
