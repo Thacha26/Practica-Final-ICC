@@ -32,7 +32,12 @@ Dante Raziel Carriche Arriaga
 Clona el repositorio "Practica Final ICC", con el siguiente link:
 https://github.com/Thacha26/Practica-Final-ICC.git
 ```
-
+```bash
+Para poder jugar TODOS los juegos, es decir, ingresar desde el menu principal y seleccionar que jugar, se deberá de escribir en la terminal
+javac menu.java
+java menu
+Y después seguir las instrucciones que aparezcan
+```
 ```bash
 Para poder jugar conecta cuatro, se deberá de escribir en la terminal
 javac main.java
