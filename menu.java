@@ -236,6 +236,7 @@ public class menu {
                         switch (juego) {
                             // Caso 1: Cuadrado Mágico
                             case 1:
+<<<<<<< HEAD
                                 CuadradoMagico juegoCuadradoMagico = new CuadradoMagico();
                                 juegoCuadradoMagico.colocarAleatorio();
                                 System.out.println(juegoCuadradoMagico.mostrarTablero());
@@ -258,18 +259,32 @@ public class menu {
 										if (players[i] != null && players[i].obtenerNombre().equalsIgnoreCase(jugadorActual.obtenerNombre())) {
 											posicion = i + 1;
 											break;
+=======
+							CuadradoMagico juegocuadradoMagico = new CuadradoMagico();
+							
+							mainCuadradoMagico.main(new String[]{});
+                             System.out.println("\nHas ganado " + jugadorActual.obtenerPuntos() + "\nTus puntos actuales son: " + jugadorActual.obtenerPuntos());
+							for (int i = 0; i < players.length; i++) {
+							if (players[i] != null && players[i].obtenerNombre().equalsIgnoreCase(jugadorActual.obtenerNombre())) {
+							break;
+>>>>>>> 2590c15 (Se agregaron mejoras para tener las excepciones en todos los juegos)
 										}
 									}
 									
 									// Muestra la posición
 									System.out.println("¡Felicidades! Has quedado en la posición " + posicion + " con " + jugadorActual.obtenerPuntos() + " puntos.");
+<<<<<<< HEAD
                                 }
+=======
+                                
+>>>>>>> 2590c15 (Se agregaron mejoras para tener las excepciones en todos los juegos)
                                 break;
 
                             // Caso 2: Conecta 4
                             case 2:
                                 conecta4 juegoConecta4 = new conecta4();
 
+<<<<<<< HEAD
                                 System.out.println(juegoConecta4.mostrarTablero());
 
                                 boolean juegoTerminadoConecta4 = false;
@@ -302,6 +317,10 @@ public class menu {
                                         juegoTerminadoConecta4 = true;
                                     }
 									 
+=======
+								main.main(new String[]{});
+								System.out.println("\nHas ganado " + jugadorActual.obtenerPuntos() + "\nTus puntos actuales son: " + jugadorActual.obtenerPuntos());
+>>>>>>> 2590c15 (Se agregaron mejoras para tener las excepciones en todos los juegos)
 									for (int i = 0; i < players.length; i++) {
 										if (players[i] != null && players[i].obtenerNombre().equalsIgnoreCase(jugadorActual.obtenerNombre())) {
 											posicion = i + 1;
@@ -311,7 +330,11 @@ public class menu {
 									
 									// Muestra la posición
 									System.out.println("¡Felicidades! Has quedado en la posición " + posicion + " con " + jugadorActual.obtenerPuntos() + " puntos.");
+<<<<<<< HEAD
                                 }
+=======
+                                
+>>>>>>> 2590c15 (Se agregaron mejoras para tener las excepciones en todos los juegos)
                                 break;
                         }
 
@@ -363,8 +386,12 @@ public class menu {
 						switch(juego){
 							case 1:
 							Salvados juegoSalvados = new Salvados(jugadorActual.obtenerNombre());
+<<<<<<< HEAD
 							   juegoSalvados.jugar();  // Aquí el jugador juega el juego de "Salvados"
 					
+=======
+							MainSalvados.main(new String[]{});
+>>>>>>> 2590c15 (Se agregaron mejoras para tener las excepciones en todos los juegos)
 							System.out.println("\n Has ganado " + jugadorActual.obtenerPuntos() + " \n Tus puntos actuales son: " + jugadorActual.obtenerPuntos());
 				
 							for (int i = 0; i < players.length; i++) {
@@ -383,8 +410,12 @@ public class menu {
 						   
 						case 2: // Torres de Hanoi
 							Hanoi seguirJugando = new Hanoi("\n");
+<<<<<<< HEAD
 							seguirJugando.jugar();  // Aquí se inicia el juego de Torres de Hanoi
 				
+=======
+							mainHanoi.main(new String[]{});
+>>>>>>> 2590c15 (Se agregaron mejoras para tener las excepciones en todos los juegos)
 							System.out.println("\n Has ganado " + jugadorActual.obtenerPuntos() + " \n Tus puntos actuales son: " + jugadorActual.obtenerPuntos());
 							
 							for (int i = 0; i < players.length; i++) {
@@ -401,7 +432,10 @@ public class menu {
 						break;
 					}
 						
+<<<<<<< HEAD
 					
+=======
+>>>>>>> 2590c15 (Se agregaron mejoras para tener las excepciones en todos los juegos)
 
                 // Ver mejores 3 puntajes
                 case 3:
