@@ -49,16 +49,8 @@ public class mainHanoi {
                     //Iniciar el juego
                     juego = new Hanoi(""); 
                     juego.jugar();  // Comienza el juego
-
-                    //Pregunta al usuariosi continuar o salir después de jugar
-                    System.out.println("¿Quieres seguir jugando este maravilloso juego? (S/N)");
-                    String respuesta = sc.nextLine();
-                    if (respuesta.equalsIgnoreCase("N")) {
-                        seguirJugando = false;
-                    } else {
-                        //Si el usuario quiere jugar otra vez, simplemente se le reinicia el juego
-                        juego = new Hanoi("");
-                    }
+                    juego = new Hanoi("");
+                    
                     break;
                 
 
@@ -88,6 +80,7 @@ public class mainHanoi {
                     // Salir del juego
                     System.out.println("¡Gracias por jugar!, aaaaaaadiossssssss!!!!!!!!!!");
                     seguirJugando = false;
+
                     break;
 
                 default:
@@ -95,7 +88,6 @@ public class mainHanoi {
             }
         }
     
-        sc.close();
     }
 
     /**
