@@ -3,22 +3,22 @@ import java.io.*; //para la serialización deobjetos
 import java.util.Scanner;
 import java.util.InputMismatchException; //para los errores
 public class menu{
+
+    //Los siguientes métodos ayudarán a regresar correctamente los puntos del usuario
     public static int evaluarResultado(int adivina, int ultimaSilla) {
-        // Implement your result evaluation logic here
         if (adivina == ultimaSilla) {
-            return 1;  // Correct guess
-        } else {
-            return 2;  // Incorrect guess
+            return 1;  
+            return 2;  
         }
     }
     public static int evaluarResultado(cuadradoMagico juego, int fila, int col, int num) {
         // Verificar si el movimiento es válido según las reglas del cuadrado mágico.
         if (juego.colocar(fila, col, num)) {
             // Movimiento válido
-            return 1;  // Correcto movimiento
+            return 1;  //movimiento coreecto
         } else {
             // Movimiento inválido
-            return 2;  // Movimiento incorrecto
+            return 2;  //movimiento ncorrecto
         }
     }
     
@@ -99,11 +99,11 @@ public class menu{
                     System.out.println(cadena);
                     System.out.println("Por favor, ingresa un número entero. Intenta de nuevo.");
                     System.out.println(cadena);
-                    scanner.nextLine(); // Limpiar el buffer de entrada
+                    scanner.nextLine(); 
                 }
             }
 
-            // Validar la opción
+            //Validar la opción
             while (decision != 1 && decision != 2 && decision != 3 && decision != 4 && decision != 5 && decision != 6) {
                 System.out.println(cadena);
                 System.out.println("Por favor, escoge una opción válida.");
@@ -117,7 +117,7 @@ public class menu{
                         System.out.println(cadena);
                         System.out.println("Por favor, ingresa un número entero. Intenta de nuevo.");
                         System.out.println(cadena);
-                        scanner.nextLine(); // Limpiar el buffer de entrada
+                        scanner.nextLine(); 
                     }
                 }
             }
@@ -129,7 +129,7 @@ public class menu{
                     System.out.println("Por favor, escribe solo tu nombre o apodo");
                     System.out.println(cadena);
 
-                    scanner.nextLine(); // Limpiar el buffer de entrada
+                    scanner.nextLine(); 
                     nombre = scanner.nextLine();
 
                     		//Aqui vamos a deserializar para leer el archivo y ver si ya habia jugadores registrados
@@ -254,16 +254,17 @@ public class menu{
                          mainCuadradoMagico.main(new String[]{});
                         System.out.println("Tus puntos actuales son: " + jugadorActual.obtenerPuntos());
                         System.out.println("Ya solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
+                        //Se escriben las variables para que permita devolver corrextamente las variables
                         int col = 0;
                         int fila = 0;
                         int num = 0;
                         int resultado = evaluarResultado(juegocuadradoMagico, fila, col, num);
         
-        // Asignar puntos basados en el resultado
+        //Asignar puntos basados en el resultado
         if (resultado == 1) {
-            jugadorActual.agregarPuntos(10);  // Ganó, 10 puntos
+            jugadorActual.agregarPuntos(10);  
         } else if (resultado == 2) {
-            jugadorActual.agregarPuntos(2);   // Perdió, 2 puntos
+            jugadorActual.agregarPuntos(2);   
         } 
                                 
                          break;
@@ -324,15 +325,14 @@ public class menu{
                             case 1:
                                 Salvados juegoSalvados = new Salvados(jugadorActual.obtenerNombre());
                                 MainSalvados.main(new String[]{});
-                                int adivina = 0;  // Example initialization, you need to adjust this based on game logic
+                                int adivina = 0; 
                                 int ultimaSilla = 0;
                                 int resultado = evaluarResultado(adivina, ultimaSilla);
 
-                                // Asignar puntos basados en el resultado
                                 if (resultado == 1) {
-                                    jugadorActual.agregarPuntos(10);  // Ganó, 10 puntos
+                                    jugadorActual.agregarPuntos(10);  
                                 } else if (resultado == 2) {
-                                    jugadorActual.agregarPuntos(2);   // Perdió, 2 puntos
+                                    jugadorActual.agregarPuntos(2);  
                                 } 
                                 System.out.println("\n Has ganado " + jugadorActual.obtenerPuntos() + " \n Tus puntos actuales son: " + jugadorActual.obtenerPuntos() + "\n Ya solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
                                 
