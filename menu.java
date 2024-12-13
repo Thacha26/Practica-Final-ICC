@@ -232,7 +232,7 @@ public class menu {
 
                         switch (juego) {
 							case 1:  // Cuadrado Mágico
-								CuadradoMagico juegocuadradoMagico = new CuadradoMagico();
+								cuadradoMagico juegocuadradoMagico = new cuadradoMagico();
 								mainCuadradoMagico.main(new String[]{});
 								System.out.println("\nHas ganado " + jugadorActual.obtenerPuntos() + "\nTus puntos actuales son: " + jugadorActual.obtenerPuntos() + "\nYa solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
 								
