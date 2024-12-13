@@ -1,13 +1,30 @@
-/*FALTA*/
-//Documentar un poquititito
-//Al final de cada juego, informar al jugador su posicion respecto a los demas
-//Al fianl de cada juego, si gana, con el metodo AGREGARPUNTOS() sumar 10 puntos y ya 
-import java.io.*;
+//Se importan las librerías necesarias
+import java.io.*; //para la serialización deobjetos
 import java.util.Scanner;
-import java.util.InputMismatchException;
+import java.util.InputMismatchException; //para los errores
 public class menu{
-
+    public static int evaluarResultado(int adivina, int ultimaSilla) {
+        // Implement your result evaluation logic here
+        if (adivina == ultimaSilla) {
+            return 1;  // Correct guess
+        } else {
+            return 2;  // Incorrect guess
+        }
+    }
+    public static int evaluarResultado(cuadradoMagico juego, int fila, int col, int num) {
+        // Verificar si el movimiento es válido según las reglas del cuadrado mágico.
+        if (juego.colocar(fila, col, num)) {
+            // Movimiento válido
+            return 1;  // Correcto movimiento
+        } else {
+            // Movimiento inválido
+            return 2;  // Movimiento incorrecto
+        }
+    }
+    
+    
     public static void main(String[] args){
+        
         Scanner scanner = new Scanner(System.in);
         jugador[] players = new jugador[100];
         jugador jugadorActual = null;
@@ -20,6 +37,8 @@ public class menu{
         boolean seguir = true;
         String cadena = "**************************************************************************";
 
+        
+
         System.out.println(cadena);
         System.out.println("Por favor, indica qué día quieres jugar");
         System.out.println(cadena);
@@ -28,6 +47,7 @@ public class menu{
         System.out.println("3. Quiero salir");
         System.out.println(cadena);
 
+        
         // Selección de día
         while (dia != 1 && dia != 2 && dia != 3) {
             try {
@@ -226,20 +246,35 @@ public class menu{
                             System.out.println(cadena);
                         }
 
+                        
                         //Juegos del dia uno
-                        switch (juego) {
-                            case 1:  //Cuadrado Mágico
-                                cuadradoMagico juegocuadradoMagico = new cuadradoMagico();
-                                mainCuadradoMagico.main(new String[]{});
-                                System.out.println("Tus puntos actuales son: " + jugadorActual.obtenerPuntos());
-                                System.out.println("Ya solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
-                                break;
+                    switch (juego) {
+                         case 1:  //Cuadrado Mágico
+                         cuadradoMagico juegocuadradoMagico = new cuadradoMagico();
+                         mainCuadradoMagico.main(new String[]{});
+                        System.out.println("Tus puntos actuales son: " + jugadorActual.obtenerPuntos());
+                        System.out.println("Ya solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
+                        int col = 0;
+                        int fila = 0;
+                        int num = 0;
+                        int resultado = evaluarResultado(juegocuadradoMagico, fila, col, num);
+        
+        // Asignar puntos basados en el resultado
+        if (resultado == 1) {
+            jugadorActual.agregarPuntos(10);  // Ganó, 10 puntos
+        } else if (resultado == 2) {
+            jugadorActual.agregarPuntos(2);   // Perdió, 2 puntos
+        } 
+                                
+                         break;
 
-                            //Conecta 4
-                            case 2:  
-                                conecta4 juegoConecta4 = new conecta4();
-                                main.main(new String[]{});
-                                System.out.println("\nHas ganado " + jugadorActual.obtenerPuntos() + "\nTus puntos actuales son: " + jugadorActual.obtenerPuntos() + "\nYa solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
+                         //Conecta 4
+                         case 2:  
+                         conecta4 juegoConecta4 = new conecta4();
+                         main.main(new String[]{});
+                         System.out.println("\nHas ganado " + jugadorActual.obtenerPuntos() + "\nTus puntos actuales son: " + jugadorActual.obtenerPuntos() + "\nYa solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
+                                
+
                                 break;
                         }
                     } else {
@@ -289,13 +324,26 @@ public class menu{
                             case 1:
                                 Salvados juegoSalvados = new Salvados(jugadorActual.obtenerNombre());
                                 MainSalvados.main(new String[]{});
+                                int adivina = 0;  // Example initialization, you need to adjust this based on game logic
+                                int ultimaSilla = 0;
+                                int resultado = evaluarResultado(adivina, ultimaSilla);
+
+                                // Asignar puntos basados en el resultado
+                                if (resultado == 1) {
+                                    jugadorActual.agregarPuntos(10);  // Ganó, 10 puntos
+                                } else if (resultado == 2) {
+                                    jugadorActual.agregarPuntos(2);   // Perdió, 2 puntos
+                                } 
                                 System.out.println("\n Has ganado " + jugadorActual.obtenerPuntos() + " \n Tus puntos actuales son: " + jugadorActual.obtenerPuntos() + "\n Ya solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
+                                
                                 break;
 
                             case 2: // Torres de Hanoi
                                 Hanoi seguirJugando = new Hanoi("\n");
                                 mainHanoi.main(new String[]{});
                                 System.out.println("\n Has ganado " + jugadorActual.obtenerPuntos() + " \n Tus puntos actuales son: " + jugadorActual.obtenerPuntos() + "\n Ya solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
+                                // Después de que el jugador termine el juego y gane puntos:
+
                                 break;
                         }
                     }
@@ -362,7 +410,7 @@ public class menu{
                             System.out.println(cadena);
                             System.out.println("Por favor, ingresa un número entero. Intenta de nuevo.");
                             System.out.println(cadena);
-                            scanner.nextLine(); // Limpiar el buffer de entrada
+                            scanner.nextLine(); 
                         }
                     }
                     break;

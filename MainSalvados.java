@@ -17,14 +17,14 @@ public class MainSalvados {
         String jugador = "";  // Variable que almacena el nombre
         Salvados juego = null; // Se inicializa el juego
         
-        // Se muestra el menú al empezar el juego
+        //Se muestra el menú al empezar el juego
         while (seguirJugando) {
             System.out.println("\n--- MENÚ ---");
             System.out.println("1. Jugar");
             System.out.println("2. Ver reglas");
             System.out.println("3. Salir");
 
-            // Validación para la entrada del menú
+            //Validación para la entrada del menú
             int opcion = 0;
             boolean opcionValida = false;
             while (!opcionValida) {
@@ -63,14 +63,14 @@ public class MainSalvados {
                 
 
                 case 2:
-                    // Se muestran las reglas
+                    //Se muestran las reglas
                     System.out.println(separador);
                     mostrarReglas();
                     break;
 
                 
                 case 3:
-                    // Salir del juego
+                    //Salir del juego
                     System.out.println("¡Gracias por jugar!, aaaaaaadiossssssss!!!!!!!!!!");
                     seguirJugando = false;
                     break;
