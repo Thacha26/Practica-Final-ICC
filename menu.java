@@ -5,23 +5,25 @@ import java.util.InputMismatchException; //para los errores
 public class menu{
 
     //Los siguientes métodos ayudarán a regresar correctamente los puntos del usuario
-    public static int evaluarResultado(int adivina, int ultimaSilla) {
+    public static int evaluarResultadoSalvados(int adivina, int ultimaSilla) {
+        //verificar si el movimiento es válido según las reglas del cuadrado mágico
         if (adivina == ultimaSilla) {
-            return 1;  
-            return 2;  
+            //movimiento válido
+            return 1; //movimiento correcto, ganaste
+        } else {
+            //movimiento inválido
+            return 2; //movimiento incorrecto, perdiste
         }
     }
-    public static int evaluarResultado(cuadradoMagico juego, int fila, int col, int num) {
+
+    public static int evaluarResultadoCuadrado(cuadradoMagico juego, int fila, int col, int num) {
         // Verificar si el movimiento es válido según las reglas del cuadrado mágico.
         if (juego.colocar(fila, col, num)) {
-            // Movimiento válido
-            return 1;  //movimiento coreecto
+            return 1;  // movimiento correcto
         } else {
-            // Movimiento inválido
-            return 2;  //movimiento ncorrecto
+            return 2;  // movimiento incorrecto
         }
-    }
-    
+    } 
     
     public static void main(String[] args){
         
@@ -252,21 +254,21 @@ public class menu{
                          case 1:  //Cuadrado Mágico
                          cuadradoMagico juegocuadradoMagico = new cuadradoMagico();
                          mainCuadradoMagico.main(new String[]{});
-                        System.out.println("Tus puntos actuales son: " + jugadorActual.obtenerPuntos());
-                        System.out.println("Ya solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
+                       
                         //Se escriben las variables para que permita devolver corrextamente las variables
                         int col = 0;
                         int fila = 0;
                         int num = 0;
-                        int resultado = evaluarResultado(juegocuadradoMagico, fila, col, num);
+                        int resultado = evaluarResultadoCuadrado(juegocuadradoMagico, fila, col, num);
         
         //Asignar puntos basados en el resultado
-        if (resultado == 1) {
-            jugadorActual.agregarPuntos(10);  
-        } else if (resultado == 2) {
-            jugadorActual.agregarPuntos(2);   
-        } 
-                                
+                       if (resultado == 1) {
+                       jugadorActual.agregarPuntos(10);  
+                      } else {
+                         jugadorActual.agregarPuntos(2);   
+                         } 
+                         System.out.println("\n Has ganado " + jugadorActual.obtenerPuntos() + " \n Tus puntos actuales son: " + jugadorActual.obtenerPuntos() + "\n Ya solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
+      
                          break;
 
                          //Conecta 4
@@ -325,13 +327,14 @@ public class menu{
                             case 1:
                                 Salvados juegoSalvados = new Salvados(jugadorActual.obtenerNombre());
                                 MainSalvados.main(new String[]{});
-                                int adivina = 0; 
-                                int ultimaSilla = 0;
-                                int resultado = evaluarResultado(adivina, ultimaSilla);
+                                int adivina = scanner.nextInt(); 
+                                int ultimaSilla = juegoSalvados.obtenerUltimaSilla();
+                                
+                                int resultado = evaluarResultadoSalvados(adivina, ultimaSilla);
 
                                 if (resultado == 1) {
-                                    jugadorActual.agregarPuntos(10);  
-                                } else if (resultado == 2) {
+                                    jugadorActual.agregarPuntos(12);  
+                                } else {
                                     jugadorActual.agregarPuntos(2);  
                                 } 
                                 System.out.println("\n Has ganado " + jugadorActual.obtenerPuntos() + " \n Tus puntos actuales son: " + jugadorActual.obtenerPuntos() + "\n Ya solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
@@ -339,8 +342,10 @@ public class menu{
                                 break;
 
                             case 2: // Torres de Hanoi
-                                Hanoi seguirJugando = new Hanoi("\n");
+                             
+                            Hanoi seguirJugando = new Hanoi("\n");
                                 mainHanoi.main(new String[]{});
+                                
                                 System.out.println("\n Has ganado " + jugadorActual.obtenerPuntos() + " \n Tus puntos actuales son: " + jugadorActual.obtenerPuntos() + "\n Ya solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
                                 // Después de que el jugador termine el juego y gane puntos:
 

@@ -78,7 +78,7 @@ public class mainHanoi {
 
                 case 4:
                     // Salir del juego
-                    System.out.println("¡Gracias por jugar!, aaaaaaadiossssssss!!!!!!!!!!");
+                    System.out.println("¡Gracias por jugar!, aaaaaaadiossssssss!!!!!!!!!! (Si no sale del programa presione cualquier letra)");
                     seguirJugando = false;
 
                     break;

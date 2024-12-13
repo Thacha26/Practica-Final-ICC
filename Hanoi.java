@@ -9,27 +9,19 @@
 
  public class Hanoi {
      protected int numD; // Variable para el número de discos
-     protected String nombredelJugador; // Nombre del jugador
-     protected int puntos; // Puntos del jugador
      String separador = "..............................................";
- 
-     /**
-      * Constructor con el que se debe inicializar el nombre del jugador y los puntos.
-      * Los puntos se inicializan en 0 y el número de discos siempre será de 6
-      *
-      * @param nombredelJugador nombre del usuaroo
-      */
-     public Hanoi(String nombredelJugador) {
-         this.nombredelJugador = nombredelJugador;
-         this.puntos = 0; // Inicializa los puntos a 0.
+    
+     public Hanoi(String var) {
          this.numD = 6; //se inicializa el juego con 6 discos, siempre serán 6.
      }
- 
+   
      /**
       * Método principal
       * El jugador debe de mover todos los discos entre los postes hasta completar el juego siempre siguiendo las reglas
       * El número de movimientos se cuenta y si lo hace en el ínimo se le dann los puntos máximos, si no, se le descuentan
       */
+
+      
      public void jugar() {
          // Se declaran los ponstes (torres) y el num de discos
          int[] poste1 = new int[numD];
@@ -65,8 +57,7 @@
                  if (gana(poste3)) { // Verifica si el usuario ya ganó
                      verPostes(poste1, poste2, poste3); //muestra como se ven los postes después de ese movimietno
                      System.out.println("Bieeeeeeeen! ya terminaste el juego y fueron en " + movimientos + " movimientos.");
-                     puntos = 10 - movimientos; // Calcula los puntos basado en los movimientos realizados.
-                     consultarPosicion(); // Muestra la posición del jugador de acuerdo a los puntos obtenidoas
+
                      jugar = false; //se termina el juego.
                  }
              } else {
@@ -264,31 +255,6 @@
              System.out.println("Mover disco del poste (torre) " + inicio + " al poste " + allegar);
              mostrarSolucion(num - 1, temporal, inicio, allegar); 
          }
-     }
- 
-     /**
-      * Muestra la posición actual del jugador según los puntos obtenidos, es decir, su nombre y el número de puntos.
-      */
-     public void consultarPosicion() {
-         System.out.println("El jugador " + nombredelJugador + " tiene " + puntos + " puntos.");
-         System.out.println(separador);
-     }
- 
-     /**
-      * Obtiene los puntos actuales del jugador.
-      *
-      * @return Los puntos actuales del jugador.
-      */
-     public int obtenerPuntos() {
-         return puntos;
-     }
- 
-     /**
-      * Obtiene el nombre del jugador.
-      *
-      * @return El nombre del jugador.
-      */
-     public String obtenernombredelJugador() {
-         return nombredelJugador;
+         
      }
  }

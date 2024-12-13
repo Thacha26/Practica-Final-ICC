@@ -11,7 +11,7 @@ public class Salvados {
     protected int puntos;
     String separador = "..............................................";
     jugador jugadorActual;
-        
+    protected int ultimaSilla = -1;   
     /**
      * Constructor para inicializar nombre y puntos, puntos se inicializa en 0
      *
@@ -22,6 +22,13 @@ public class Salvados {
         this.nombredelJugador = nombredelJugador;
         this.puntos = 0;
         this.jugadorActual = new jugador(nombredelJugador);  // Inicializar jugadorActual
+    }
+
+    /**
+     * Método para obtener la última silla y salga en el menu
+     */
+    public int obtenerUltimaSilla() {
+        return this.ultimaSilla;
     }
     // Se eliminan a las personas
     public void jugar() {
@@ -88,43 +95,8 @@ public class Salvados {
         System.out.println(separador);
         if (adivina == ultimaSilla) {
             System.out.println("¡SIIIIIIII. Correcto! La persona que se sobrevive es la de la silla número: " + ultimaSilla);
-            int agregarPuntos = 12;
-			jugadorActual.agregarPuntos(agregarPuntos);
         } else {
             System.out.println("¡NOOOOOOOOOOO. Incorrecto! La persona que se sobrevive es la de la silla número: " + ultimaSilla);
-            int agregarPuntos = 2;
-			jugadorActual.agregarPuntos(agregarPuntos);
         }
-        System.out.println("¡Has ganado " + jugadorActual.obtenerPuntos() + " puntos!");
-System.out.println("Tus puntos actuales son: " + jugadorActual.obtenerPuntos());
-
-        // Se muestran los puntos y su posición
-        consultarPosicion();
     }
-
-        /**
-         * Muestra la posición del jugador
-         */
-        public void consultarPosicion() {
-            System.out.println("El jugador " + nombredelJugador);
-            System.out.println(separador);
-        }
-
-        /**
-         * Obtiene los puntos del jugador
-         * 
-         * @return Los puntos
-         */
-        public int obtenerPuntos() {
-            return puntos;
-        }
-
-        /**
-         * Obtiene el nombre del jugador
-         * 
-         * @return El nombre
-         */
-        public String obtenernombredelJugador() {
-            return nombredelJugador;
-        }
 }
