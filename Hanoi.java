@@ -8,7 +8,7 @@
  import java.util.Scanner;
 
  public class Hanoi {
-     protected int numD; // Variable para el número de discos
+     public int numD; // Variable para el número de discos
      String separador = "..............................................";
     
      public Hanoi(String var) {
@@ -72,7 +72,7 @@
       * @param sc El escáner para leer lo qie el usuario ingrese
       * @return El poste seleccionado
       */
-     protected int torreseleccionada(Scanner sc) {
+      public int torreseleccionada(Scanner sc) {
          while (true) {     //verifica que el número de poste que se infresó cumpla con los requerimentos, o sea, que sea 1, 2, 3
              try {
                  int seleccion = Integer.parseInt(sc.nextLine());
@@ -94,7 +94,7 @@
       * @param poste2 El segundo poste (torre).
       * @param poste3 El tercer poste (torre).
       */
-     protected void verPostes(int[] poste1, int[] poste2, int[] poste3) {
+      public void verPostes(int[] poste1, int[] poste2, int[] poste3) {
          System.out.println("Tus torres se ven así:");
          System.out.println("Poste 1: " + verPostes(poste1));
          System.out.println("Poste 2: " + verPostes(poste2));
@@ -107,7 +107,7 @@
       * @param poste El arreglo que representa a ell poste
       * @return la cadena de texto con los discos ordenados
       */
-     protected String verPostes(int[] poste) {
+      public String verPostes(int[] poste) {
          String resultado = "";
          for (int disco : poste) {
              if (disco != 0) {
@@ -127,7 +127,7 @@
       * @param poste3 El tercer poste (torre).
       * @return true si el movimiento es válido, false si no es válido
       */
-     protected boolean moverDisco(int inicio, int allegar, int[] poste1, int[] poste2, int[] poste3) {
+      public boolean moverDisco(int inicio, int allegar, int[] poste1, int[] poste2, int[] poste3) {
          int[] posteinicio = seleccionarPoste(inicio, poste1, poste2, poste3);
          int[] posteallegar = seleccionarPoste(allegar, poste1, poste2, poste3);
  
@@ -150,7 +150,7 @@
       * @param poste3 El tercer poste (torre).
       * @return El arreglo según el poste seleccionado
       */
-     protected int[] seleccionarPoste(int num, int[] poste1, int[] poste2, int[] poste3) {
+      public int[] seleccionarPoste(int num, int[] poste1, int[] poste2, int[] poste3) {
          if (num == 1) return poste1;
          if (num == 2) return poste2;
          return poste3;
@@ -162,7 +162,7 @@
       * @param poste El arreglo del poste 
       * @return El valor del disco de hasata arriba, o 0 si el poste no tiene ningún disco
       */
-     protected int dicoDeArriba(int[] poste) {
+      public int dicoDeArriba(int[] poste) {
          for (int i = poste.length - 1; i >= 0; i--) {
              if (poste[i] != 0) return poste[i]; // Retorna el disco de hasta arriba
          }
@@ -174,7 +174,7 @@
       *
       * @param poste El arreglo del poste del que se va a eliminar el disco superior.
       */
-     protected void eliminarDiscoDeArriba(int[] poste) {
+      public void eliminarDiscoDeArriba(int[] poste) {
          for (int i = poste.length - 1; i >= 0; i--) {
              if (poste[i] != 0) {
                  poste[i] = 0; //Elimina el disco para que no se duplique
@@ -189,7 +189,7 @@
       * @param disco El número del disco que se va a colocar.
       * @param poste El arreglo del poste donde se va a colocar el disco.
       */
-     protected void ponerDisco(int disco, int[] poste) {
+      public void ponerDisco(int disco, int[] poste) {
          for (int i = 0; i < poste.length; i++) {
              if (poste[i] == 0) {
                  poste[i] = disco; //coloca el disco emnor hasta arriba
@@ -206,7 +206,7 @@
       * @param posteallegar El arreglo del poste de destino.
       * @return true si el movimiento es válido, false si no lo es
       */
-     protected boolean movValido(int disco, int[] posteallegar) {
+      public boolean movValido(int disco, int[] posteallegar) {
          int dicoDeArriba = dicoDeArriba(posteallegar);
          return dicoDeArriba == 0 || disco < dicoDeArriba; //verifica si el disco de hasta arriba es menor que el que se encuentra en el poste seleccionado
      }
@@ -218,7 +218,7 @@
       * @param poste3 El tercer poste
       * @return true si el jugador ha ganado, false si no
       */
-     protected boolean gana(int[] poste3) {
+     public boolean gana(int[] poste3) {
          return poste3[poste3.length - 1] == 1; // El disco más pequeño debe estar en la base de la torre final
      }
  
