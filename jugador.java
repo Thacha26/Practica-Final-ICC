@@ -132,6 +132,46 @@ public class jugador implements Serializable, Comparable<jugador>{
     }
 
     /**
+     * Metodo posiciones que ordena el arreglo de manera ascendente y devuelve las posiciones de todos lo jugadores 
+     *
+     * @param jugador[] j - Arreglo sobre el que se obtendra las posiciones
+     */
+    public static void posiciones(jugador[] j) {
+		jugador[] ordenado = j.clone(); // Clonar para no modificar el arreglo original
+	jugador aux;
+	int cont1, cont2;
+
+	if(ordenado == null) {
+	    throw new NullPointerException("No puedes ordenar un arreglo vacío");
+	}
+
+	// Arreglo para que los espacios vacíos los tome con 0 puntos
+	for(int i = 0; i < ordenado.length; i++) {
+	    if(ordenado[i] == null) {
+		ordenado[i] = new jugador(" ");
+	    }
+	}
+
+	// Implementación de Insertion Sort
+	for(cont1 = 1; cont1 < ordenado.length; cont1++) {
+	    aux = ordenado[cont1];
+
+	    for(cont2 = cont1 - 1; cont2 >= 0 && ordenado[cont2].compareTo(aux) > 0; cont2--) {
+		ordenado[cont2 + 1] = ordenado[cont2];
+	    }
+	    ordenado[cont2 + 1] = aux;
+	}
+
+	// Mostrar todas las posiciones hasta encontrar un jugador vacio
+	for (int i = 0; i < ordenado.length; i++) {
+	    if (ordenado[i].obtenerNombre().equals(" ")) {
+		break; // Detenerse al encontrar un espacio vacío
+	    }
+	    System.out.println((i + 1) + ". " + ordenado[i]); // Imprimir posición y jugador
+	}
+    }
+
+    /**
      * Metodo toString que da un formato de impresion a los jugadores
      *
      * @return String jugador - Formato de imprecion de un jugador, que posee nombre, creditos y puntos 
