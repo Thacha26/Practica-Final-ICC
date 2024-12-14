@@ -3,7 +3,8 @@ import java.io.*; //para la serialización deobjetos
 import java.util.Scanner;
 import java.util.InputMismatchException; //para los errores
 public class menu{
-
+    
+    
     //Los siguientes métodos ayudarán a regresar correctamente los puntos del usuario
     public static int evaluarResultadoSalvados(int adivina, int ultimaSilla) {
         //verificar si el movimiento es válido según las reglas del cuadrado mágico
@@ -17,14 +18,35 @@ public class menu{
     }
 
     public static int evaluarResultadoCuadrado(cuadradoMagico juego, int fila, int col, int num) {
-        // Verificar si el movimiento es válido según las reglas del cuadrado mágico.
+        //verificar si el movimiento es válido según las reglas del cuadrado mágico.
         if (juego.colocar(fila, col, num)) {
-            return 1;  // movimiento correcto
+            return 1;  //movimiento correcto
         } else {
-            return 2;  // movimiento incorrecto
+            return 2;  //movimiento incorrecto
         }
     } 
-    
+    // Método en la clase Menu para verificar si el jugador ganó en Hanoi
+
+    // Método para evaluar el resultado
+public static int evaluarResultadoConecta4(char resultado, Jugador jugadorActual) {
+    if (resultado == 'X' || resultado == 'O') {
+        // El jugador ha ganado, asignamos 12 puntos
+        return 1;
+    } else {
+        return 2;
+    }
+}
+//Este se supone que es el método creado para verificar si el jugador ya ganó, si no ha ganado devuelve 2 y si ya ganó devuelve 2, esto se usará para asignar puntos
+/*protected boolean gana(int[] poste3) {
+    //verifica si todos los discos están en el poste 3 y están en orden ascendente
+    for (int i = 0; i < poste3.length; i++) {
+        if (poste3[i] != i + 1) {  
+            return false;  //si no está en el orden correcto se decuekve false
+        }
+    }
+    return true;  // Si todos los discos están en el orden correcto, el jugador ha ganado
+}*/
+
     public static void main(String[] args){
         
         Scanner scanner = new Scanner(System.in);
@@ -33,8 +55,8 @@ public class menu{
 
         int decision;
         int juego;
-        int dia = -1;
-        int posicion = -1;
+        int dia = -1; //permite cambiar de día
+        int posicion = -1; //
         String nombre;
         boolean seguir = true;
         String cadena = "**************************************************************************";
@@ -50,7 +72,7 @@ public class menu{
         System.out.println(cadena);
 
         
-        // Selección de día
+        //Se selecciona el día
         while (dia != 1 && dia != 2 && dia != 3) {
             try {
                 System.out.println(cadena);
@@ -58,7 +80,7 @@ public class menu{
                 System.out.println(cadena);
 
                 dia = scanner.nextInt();
-                if (dia == 3) {
+                if (dia == 3) { //Si selecciona la opción 3 sale del proframa
                     System.out.println("Ni modo, te pierdes de mucho, habían buenos juegos, ¡adiós!");
                     return;
                 }
@@ -66,7 +88,7 @@ public class menu{
                 System.out.println(cadena);
                 System.out.println("Por favor, ingresa un número entero. Intenta de nuevo.");
                 System.out.println(cadena);
-                scanner.nextLine(); // Limpiar el buffer de entrada
+                scanner.nextLine();
             }
         }
 
@@ -92,7 +114,6 @@ public class menu{
             System.out.println("6. Quiero cambiar de día");
             System.out.println(cadena);
 
-            // Leer opción del menú
             while (true) {
                 try {
                     decision = scanner.nextInt();
@@ -155,15 +176,17 @@ public class menu{
                     boolean existeJug = false;
                     boolean espacioDisp = false;
 
+                    //Agranda/guarda el arreflo de los jugadores
                     for (int i = 0; i < players.length; i++) {
-                        if (players[i] != null && players[i].obtenerNombre().equalsIgnoreCase(nombre)) {
+                        if (players[i] != null && players[i].obtenerNombre().equalsIgnoreCase(nombre)) { //Verifica si un jugador ya está registrado o no, comparando con la posición
                             System.out.println("Ya estás registrado, " + nombre + ". Tus créditos actuales son: " + players[i].obtenerCreditos());
                             jugadorActual = players[i];
                             existeJug = true;
                             break;
                         }
                     }
-                    if (!existeJug) {
+                    //Si el jugador no está registrado busca una posición vacía en el arreglo y registrarlo
+                    if (!existeJug) { 
                         for (int i = 0; i < players.length; i++) {
                             if (players[i] == null) {
                                 players[i] = new jugador(nombre);
@@ -200,7 +223,7 @@ public class menu{
                     }
 
                     System.out.println(cadena);
-                    if (dia == 1) {
+                    if (dia == 1) { //Muestra los juegos que están en el día 1
                         System.out.println("¿Qué juego deseas jugar?");
                         System.out.println(cadena);
                         System.out.println("1. Cuadrado Mágico");
@@ -214,10 +237,11 @@ public class menu{
                                 System.out.println(cadena);
                                 System.out.println("Por favor, ingresa un número entero. Intenta de nuevo.");
                                 System.out.println(cadena);
-                                scanner.nextLine(); // Limpiar el buffer de entrada
+                                scanner.nextLine();
                             }
                         }
 
+                        //Si la opción que ingresa el jugador no está dentro de las opcciones lanza un error
                         while (juego != 1 && juego != 2) {
                             System.out.println(cadena);
                             System.out.println("Por favor, escoge una opción válida");
@@ -231,11 +255,12 @@ public class menu{
                                     System.out.println(cadena);
                                     System.out.println("Por favor, ingresa un número entero. Intenta de nuevo.");
                                     System.out.println(cadena);
-                                    scanner.nextLine(); // Limpiar el buffer de entrada
+                                    scanner.nextLine();
                                 }
                             }
                         }
 
+                        //Verifica si el jugador tiene los créditos suficientes o no
                         if (!jugadorActual.suficientesCreditos()) {
                             System.out.println(cadena);
                             System.out.println("Lo siento, no tienes créditos para jugar algún juego");
@@ -253,32 +278,59 @@ public class menu{
                     switch (juego) {
                          case 1:  //Cuadrado Mágico
                          cuadradoMagico juegocuadradoMagico = new cuadradoMagico();
-                         mainCuadradoMagico.main(new String[]{});
-                       
+                         mainCuadradoMagico.main(new String[]{}); //Se llama al main de Cuadrado para que se muestre todo el menú creado
+                   
+
                         //Se escriben las variables para que permita devolver corrextamente las variables
-                        int col = 0;
+                        int col = 0; 
                         int fila = 0;
                         int num = 0;
-                        int resultado = evaluarResultadoCuadrado(juegocuadradoMagico, fila, col, num);
+                        int resultado = evaluarResultadoCuadrado(juegocuadradoMagico, fila, col, num); //Se mandda a llamar el método para poder usar el siguiente if y asignar los puntos
         
-        //Asignar puntos basados en el resultado
-                       if (resultado == 1) {
+                       //Asignar puntos basados en el resultado
+                       if (resultado == 1) { //Da 10pts si el jugador ganó
                        jugadorActual.agregarPuntos(10);  
                       } else {
-                         jugadorActual.agregarPuntos(2);   
+                         jugadorActual.agregarPuntos(2); //si el jugador no ganó nada más devuelve 2   
                          } 
+                         //Se imprimen los resultados
                          System.out.println("\n Has ganado " + jugadorActual.obtenerPuntos() + " \n Tus puntos actuales son: " + jugadorActual.obtenerPuntos() + "\n Ya solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
       
+                         //guarda la posición de los jugadores
+								for (int i = 0; i < players.length; i++) {
+									if (players[i] != null && players[i].obtenerNombre().equalsIgnoreCase(jugadorActual.obtenerNombre())) {
+										posicion = i + 1;
+										break;
+									}
+								}
+						
+								//muestra la posición, puntos y créditos
+								System.out.println("¡Felicidades! Has quedado en la posición " + posicion + " con " + jugadorActual.obtenerPuntos() + " puntos. \nYa solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
+								
                          break;
 
                          //Conecta 4
                          case 2:  
                          conecta4 juegoConecta4 = new conecta4();
-                         main.main(new String[]{});
+                         main.main(new String[]{}); //Se llama al main de conecta4 para que se muestre todo el menú creado
+                   
+                      
                          System.out.println("\nHas ganado " + jugadorActual.obtenerPuntos() + "\nTus puntos actuales son: " + jugadorActual.obtenerPuntos() + "\nYa solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
+                         //guarda la posición
+								for (int i = 0; i < players.length; i++) { //El bucle se ejecuta mientras que i sea menor que la longitud del arreflo
+                                    
+                                    //verifica si el elemento no es nulo
+									if (players[i] != null && players[i].obtenerNombre().equalsIgnoreCase(jugadorActual.obtenerNombre())) {
+										posicion = i + 1; //Se convierte lo de la posición del índice a 1
+										break;
+									}
+								}
+						
+								// Muestra la posición
+								System.out.println("¡Felicidades! Has quedado en la posición " + posicion + " con " + jugadorActual.obtenerPuntos() + " puntos. \nYa solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
+								
                                 
-
-                                break;
+                         
                         }
                     } else {
                         System.out.println("Qué juego deseas jugar?");
@@ -310,7 +362,7 @@ public class menu{
                                     System.out.println(cadena);
                                     System.out.println("Por favor, ingresa un número entero. Intenta de nuevo.");
                                     System.out.println(cadena);
-                                    scanner.nextLine(); // Limpiar el buffer de entrada
+                                    scanner.nextLine(); 
                                 }
                             }
                         }
@@ -326,30 +378,61 @@ public class menu{
                         switch (juego) {
                             case 1:
                                 Salvados juegoSalvados = new Salvados(jugadorActual.obtenerNombre());
-                                MainSalvados.main(new String[]{});
+                                MainSalvados.main(new String[]{});//Se llama al main de Salvados para que se muestre todo el menú creado
+                                //Se escriben las variables para que menu pueda tener acceso a ellas y las identifique
                                 int adivina = scanner.nextInt(); 
                                 int ultimaSilla = juegoSalvados.obtenerUltimaSilla();
                                 
-                                int resultado = evaluarResultadoSalvados(adivina, ultimaSilla);
+                                int resultado = evaluarResultadoSalvados(adivina, ultimaSilla); //Evalúa los resultados para asignar lospuntos
 
                                 if (resultado == 1) {
-                                    jugadorActual.agregarPuntos(12);  
+                                    jugadorActual.agregarPuntos(12);  //Si el jugador ganó le da 12 pts 
                                 } else {
-                                    jugadorActual.agregarPuntos(2);  
+                                    jugadorActual.agregarPuntos(2);  //Si el jugador no ganó solo le da 2 pts
                                 } 
                                 System.out.println("\n Has ganado " + jugadorActual.obtenerPuntos() + " \n Tus puntos actuales son: " + jugadorActual.obtenerPuntos() + "\n Ya solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
-                                
+                                //fuarda la posición
+								for (int i = 0; i < players.length; i++) {
+									if (players[i] != null && players[i].obtenerNombre().equalsIgnoreCase(jugadorActual.obtenerNombre())) {
+										posicion = i + 1;
+										break;
+									}
+								}
+						
+								// Muestra la posición
+								System.out.println("¡Felicidades! Has quedado en la posición " + posicion + " con " + jugadorActual.obtenerPuntos() + " puntos. \nYa solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
+								
                                 break;
 
                             case 2: // Torres de Hanoi
                              
                             Hanoi seguirJugando = new Hanoi("\n");
                                 mainHanoi.main(new String[]{});
+                                //Aquí se suponía que estaba mandando a llamar al juego Hanoi, obteniendo al poste 3 pq si los discos ya estban ahí e iban del mayor a menor (iniciando de la base del poste) entones el jugador ya ganaba
+
+                                //Falta que tenga acceso a las variables de la clase hanoi para que no marque el error, las ponía pero aún aasí marcaba el error
+                               /*  if (juegoHanoi.gana(juegoHanoi.getPoste3())) {
+                                    jugadorActual.agregarPuntos(12);
+                                } else {
+                                    jugadorActual.agregarPuntos(12); 
+                                }
+                            
+                                //Aqupi hace lo mismo que los otros, dala posición, puntos, y créditos
                                 
                                 System.out.println("\n Has ganado " + jugadorActual.obtenerPuntos() + " \n Tus puntos actuales son: " + jugadorActual.obtenerPuntos() + "\n Ya solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
                                 // Después de que el jugador termine el juego y gane puntos:
-
-                                break;
+                                // Guarda la posición
+								for (int i = 0; i < players.length; i++) {
+									if (players[i] != null && players[i].obtenerNombre().equalsIgnoreCase(jugadorActual.obtenerNombre())) {
+										posicion = i + 1;
+										break;
+									}
+								}
+						
+								// Muestra la posición
+								System.out.println("¡Felicidades! Has quedado en la posición " + posicion + " con " + jugadorActual.obtenerPuntos() + " puntos. \nYa solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
+								
+                                break;*/
                         }
                     }
                     break;
@@ -388,11 +471,11 @@ public class menu{
                     System.out.println(cadena);
                     break;
 
-                // Cambiar de día
+                //cambiar de día por si el jugador no quiere jugar ninguno de esos días
                 case 6:
                     System.out.println(cadena);
                     System.out.println("Has decidido cambiar de día.");
-                    dia = -1; // Vuelve a pedir la selección del día
+                    dia = -1; //vuelve a pedile al jugador que vuelva a seleccionae el día
                     System.out.println(cadena);
                     while (dia != 1 && dia != 2 && dia != 3) {
                         try {
