@@ -114,7 +114,7 @@
                  resultado += disco + " "; // Concatena discos 
              }
          }
-         return resultado.trim(); // Elimina el último espacio que sobra
+         return resultado.trim(); //Elimina el último espacio que sobra
      }
  
      /**
@@ -133,11 +133,11 @@
  
          int disco = dicoDeArriba(posteinicio);
          if (disco == 0 || !movValido(disco, posteallegar)) {
-             return false; // Movimiento inválido si no hay disco en el poste de inicio o el movimiento no cumple con las reglas de los discos
+             return false; //Movimiento inválido si no hay disco en el poste de inicio o el movimiento no cumple con las reglas de los discos
          }
  
-         eliminarDiscoDeArriba(posteinicio); // Elimina el disco de arriba del poste de inicio.
-         ponerDisco(disco, posteallegar); // Se mueve a el disco en el poste de destino
+         eliminarDiscoDeArriba(posteinicio); //Elimina el disco de arriba del poste de inicio
+         ponerDisco(disco, posteallegar); //Se mueve a el disco en el poste de destino
          return true;
      }
  
@@ -166,7 +166,7 @@
          for (int i = poste.length - 1; i >= 0; i--) {
              if (poste[i] != 0) return poste[i]; // Retorna el disco de hasta arriba
          }
-         return 0; // Retorna 0 si el poste está vacío.
+         return 0; //si el poste está vacío regresa 0
      }
  
      /**
@@ -177,7 +177,7 @@
      protected void eliminarDiscoDeArriba(int[] poste) {
          for (int i = poste.length - 1; i >= 0; i--) {
              if (poste[i] != 0) {
-                 poste[i] = 0; // Elimina el disco para que no se duplique
+                 poste[i] = 0; //Elimina el disco para que no se duplique
                  break;
              }
          }
@@ -192,7 +192,7 @@
      protected void ponerDisco(int disco, int[] poste) {
          for (int i = 0; i < poste.length; i++) {
              if (poste[i] == 0) {
-                 poste[i] = disco; // Coloca el disco hasta arriba
+                 poste[i] = disco; //coloca el disco emnor hasta arriba
                  break;
              }
          }
