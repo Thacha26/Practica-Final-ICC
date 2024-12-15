@@ -10,9 +10,10 @@
  public class Hanoi {
      public int numD; // Variable para el número de discos
      String separador = "..............................................";
-    
+    public int movimientos;
      public Hanoi(String var) {
          this.numD = 6; //se inicializa el juego con 6 discos, siempre serán 6.
+         this.movimientos = 0; //Se agregó esta variable para que reinicilaide y uente los moviemietos cada que sea un movimiento válido
      }
    
      /**
@@ -21,7 +22,6 @@
       * El número de movimientos se cuenta y si lo hace en el ínimo se le dann los puntos máximos, si no, se le descuentan
       */
 
-      
      public void jugar() {
          // Se declaran los ponstes (torres) y el num de discos
          int[] poste1 = new int[numD];
@@ -63,7 +63,9 @@
              } else {
                  System.out.println("Nonononoooo, ese movimiento no se puede, intenta otra vez"); //Si el disco no cumple con las reglas se pide que intente otra vez
              }
+             
          }
+         System.out.println("El número total de movimientos fue: " + movimientos);
      }
  
      /**
@@ -231,13 +233,14 @@
       * @param allegar El poste final donde deben ir los discos.
       * @return El número mínimo de movimientos necesarios para resolver el juego.
       */
-     public int movimientosMin(int num, int inicio, int temporal, int allegar) {
+     public static int movimientosMin(int num, int inicio, int temporal, int allegar) {
          if (num == 1) {
              return 1;
          } else {
              return 2 * movimientosMin(num - 1, inicio, allegar, temporal) + 1;
          }
      }
+    
  
      /**
       * Muestra la solución del juego de las Torres de Hanoi, es decir, la secuencia de movimientos necesarios para resolverlo

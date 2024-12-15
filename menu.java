@@ -25,35 +25,32 @@ public class menu{
             return 2;  //movimiento incorrecto
         }
     } 
-    // Método en la clase Menu para verificar si el jugador ganó en Hanoi
-
+	
     // Método para evaluar el resultado
     public static int evaluarResultadoConecta4(char resultado, jugador jugadorActual) {
         // Si el resultado es 'O', entonces el jugador ha ganado
         if (resultado == 'O') {
-            return 1; // El jugador 'O' ha ganado, asigna 15 puntos
+            return 1; //El jugador 'O' ha ganado, asigna 15 puntos
         }
         
         // Si el resultado es otro (supongamos que 'X' ganó o hay empate)
         else if (resultado == 'X') {
-            return 2; // El jugador 'X' ha ganado, asigna 5 puntos
+            return 2; //si el jugador 'X' es el que ha ganado, asigna 5 puntos
         } else {
-            return 3; // Si es un empate, asigna 2 puntos
+            return 3; // Si es un empate da solo 2 puntos
         }
     }
     
-    //Prueba para que se den los puntos en el Hanoi.
-    /*public static int evaluarResultadoHanoi(int movimientosMin, int num, int inicio, int temporal, int allegar){
-
-      if(resultado = movimientosMin){
-      return 1;
-      } else if (resultado >= movimientosMin + 10){
-      return 2;
-      } else {
-      return 3;
-      }
-
-      }*/
+    public static int evaluarResultadoHanoi(int movimientos, int resultado, int movimientosMin) {
+        
+        if (movimientos == movimientosMin) {
+            return 1;
+        } else if (resultado <= movimientosMin + 10) {
+            return 2;
+        } else {
+            return 3;
+        }
+    }
 
     public static void main(String[] args){
         
@@ -438,7 +435,8 @@ public class menu{
 			Salvados juegoSalvados = new Salvados(jugadorActual.obtenerNombre());
 			MainSalvados.main(new String[]{});//Se llama al main de Salvados para que se muestre todo el menú creado
 			//Se escriben las variables para que menu pueda tener acceso a ellas y las identifique
-			int adivina = scanner.nextInt(); 
+			int adivina = scanner.nextInt();
+			int adivinaS = scanner.nextInt(adivina); 
 			int ultimaSilla = juegoSalvados.obtenerUltimaSilla();
                                 
 			int resultado = evaluarResultadoSalvados(adivina, ultimaSilla); //Evalúa los resultados para asignar lospuntos
@@ -485,44 +483,45 @@ public class menu{
 
 		    case 2: // Torres de Hanoi
                              
-			Hanoi seguirJugando = new Hanoi("\n");
+			 
+			Hanoi seguirJugandoHanoi = new Hanoi("\n");
 			mainHanoi.main(new String[]{});
-			//Prueba para que se den los puntos en el Hanoi.
-			/*int movimientosMin = 63;
-			  int numD = 6;
-			  int[] posteinicio = seleccionarPoste(inicio, poste1, poste2, poste3);
-			  int[] posteallegar = seleccionarPoste(allegar, poste1, poste2, poste3);
- 
-			  if (resultado == 1){
-			  jugadorActual.agregarPuntos(10);
-			  System.out.println("Has ganado 10 puntos");
-			  } else if(resultado == 2){
-			  jugadorActual.agregarPuntos(5);
-			  System.out.println("Has ganado 5 puntos");
-			  } else {
-			  jugadorActual.agregarPuntos(2);
-			  System.out.println("Has ganado 2 puntos");
-			  }
+			 //Prueba para que se den los puntos en el Hanoi.
+			 String resultado1 = "0";
+			 int resultado1Int = Integer.parseInt(resultado1);
+			 int numD = 6;
+			 int movimientos = Hanoi.movimientosMin(numD, 1, 2, 3); // Inicializamos la variable movimientos
+			 int movimientosMinimos = Hanoi.movimientosMin(6, 1, 2, 3);  // Suponiendo que este método retorna el mínimo de movimientos
+			 int resultadoH = evaluarResultadoHanoi(movimientos, resultado1Int, movimientosMinimos);
+			
+			if(movimientos == 1){
+				jugadorActual.agregarPuntos(15);
+				System.out.println("Has ganado 15 puntos");
+			} else if (movimientos == 2){
+				jugadorActual.agregarPuntos(10);
+				System.out.println("Has ganado 10 puntos");
 
-			  System.out.println("Tus puntos actuales son: " + jugadorActual.obtenerPuntos());
-			  System.out.println("Ya solo tienes " + jugadorActual.obtenerCreditos() + " creditos");
-			  //Aqui va a checar que la posicion 2 sea diferente de nulo
-			  //Porque si solo hay un jugador, siempre sera el primero 
-			  if (players[1] == null) {
-			  System.out.println(cadena);
-			  System.out.println("Estas en la posicion 1 con " + jugadorActual.obtenerPuntos() + " puntos");
-			  System.out.println(cadena);
-			  } else {
-			  System.out.println(cadena);
-			  System.out.println("Posiciones");
-			  System.out.println(cadena);
-			  jugador.posiciones(players);
-			  System.out.println(cadena);
-			  }
-			*/
+			} else {
+				jugadorActual.agregarPuntos(2);
+				System.out.println("Has ganado 2 puntos");
 
-                                
-		    }
+			}
+		
+			System.out.println("\n Has ganado " + jugadorActual.obtenerPuntos() + " \n Tus puntos actuales son: " + jugadorActual.obtenerPuntos() + "\n Ya solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
+
+			if (players[1] == null) {
+			    System.out.println(cadena);
+			    System.out.println("Estas en la posicion 1 con " + jugadorActual.obtenerPuntos() + " puntos");
+			    System.out.println(cadena);
+			} else {
+			    System.out.println(cadena);
+			    System.out.println("Posiciones");
+			    System.out.println(cadena);
+			    jugador.posiciones(players);
+			    System.out.println(cadena);
+			}
+			}  
+			
 		}
 		break;
 
