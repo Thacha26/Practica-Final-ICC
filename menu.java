@@ -26,19 +26,7 @@ public class menu{
         }
 	return 2;  
     } 
-	
-    // Método para evaluar el resultado
-    public static int evaluarResultadoConecta4(conecta4 jugadorActual) {
-        // Si el resultado es 'O', entonces el jugador ha ganado
-        if (jugadorActual.ganador() == 'O') {
-            return 1; //El jugador 'O' ha ganado, asigna 15 puntos
-        }
-	if (jugadorActual.ganador() == 'X') {
-	    return 2;
-	}
-	return 3;
-    }
-    
+	    
     public static int evaluarResultadoHanoi(int movimientos, int resultado, int movimientosMin) {
         
         if (movimientos == movimientosMin) {
@@ -333,12 +321,12 @@ public class menu{
 			    conecta4 juegoConecta4 = new conecta4();
 			    main.main(new String[]{}); //Se llama al main de conecta4 para que se muestre todo el menú creado
 			
-			    int resultadow = evaluarResultadoConecta4(juegoConecta4);
-
-			    if (resultadow == 1){
+			    resultado = juegoConecta4.ganador();
+			    
+			    if (resultado == 'O'){
 				jugadorActual.agregarPuntos(15);
 				System.out.println("Has ganado: 15 puntos");
-			    } else if (resultadow == 2){
+			    } else if (resultado == 'X'){
 				jugadorActual.agregarPuntos(5);
 				System.out.println("Has ganado: 5 puntos");
 			    } else {
