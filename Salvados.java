@@ -55,8 +55,16 @@ public class Salvados {
         System.out.println("\n" + separador);
         System.out.println("Por favor, introduce un número");
 
-        int adivina = scanner.nextInt();
-        System.out.println("\n" + separador);
+        String input = scanner.nextLine();  // Leemos la entrada como String
+        int adivina = -1;
+    
+        try {
+            adivina = Integer.parseInt(input);  // Convertimos la entrada a un número entero
+        } catch (NumberFormatException e) {
+            System.out.println("¡Error! Debes ingresar un número válido.");
+            return;  // Salimos del método si la entrada no es un número válido
+        }
+    
 
         // Se valida que el número que ingresa el usuario sí esté entre el 1 y el 100
         if (adivina < 1 || adivina > 100) {
