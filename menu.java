@@ -1,3 +1,5 @@
+/*Falta*/
+// * Que regrese bien los puntos en todos los juegos 
 //Se importan las librerías necesarias
 import java.io.*; //para la serialización deobjetos
 import java.util.Scanner;
@@ -17,28 +19,24 @@ public class menu{
         }
     }
 
-    public static int evaluarResultadoCuadrado(cuadradoMagico juego, int fila, int col, int num) {
+    public static int evaluarResultadoCuadrado(cuadradoMagico juego) {
         //verificar si el movimiento es válido según las reglas del cuadrado mágico.
-        if (juego.colocar(fila, col, num)) {
-            return 1;  //movimiento correcto
-        } else {
-            return 2;  //movimiento incorrecto
+        if (juego.tableroLLeno()) {
+            return 1;  
         }
+	return 2;  
     } 
 	
     // Método para evaluar el resultado
-    public static int evaluarResultadoConecta4(char resultado, jugador jugadorActual) {
+    public static int evaluarResultadoConecta4(conecta4 jugadorActual) {
         // Si el resultado es 'O', entonces el jugador ha ganado
-        if (resultado == 'O') {
+        if (jugadorActual.ganador() == 'O') {
             return 1; //El jugador 'O' ha ganado, asigna 15 puntos
         }
-        
-        // Si el resultado es otro (supongamos que 'X' ganó o hay empate)
-        else if (resultado == 'X') {
-            return 2; //si el jugador 'X' es el que ha ganado, asigna 5 puntos
-        } else {
-            return 3; // Si es un empate da solo 2 puntos
-        }
+	if (jugadorActual.ganador() == 'X') {
+	    return 2;
+	}
+	return 3;
     }
     
     public static int evaluarResultadoHanoi(int movimientos, int resultado, int movimientosMin) {
@@ -276,117 +274,114 @@ public class menu{
 			System.out.println("Se te ha hecho el cobro de 15 créditos");
 			System.out.println("\n Disfruta tu juego :)");
 			System.out.println(cadena);
-		    }
 
-                        
-		    //Juegos del dia uno
-                    switch (juego) {
-		    case 1:  //Cuadrado Mágico
-			cuadradoMagico juegocuadradoMagico = new cuadradoMagico();
-			mainCuadradoMagico.main(new String[]{}); //Se llama al main de Cuadrado para que se muestre todo el menú creado
+			//Juegos del dia uno
+			switch (juego) {
+			case 1:  //Cuadrado Mágico
+			    cuadradoMagico juegocuadradoMagico = new cuadradoMagico();
+			    mainCuadradoMagico.main(new String[]{}); //Se llama al main de Cuadrado para que se muestre todo el menú creado
                    
-                        //Se escriben las variables para que permita devolver corrextamente las variables
-                        int col = 0; 
-                        int fila = 0;
-                        int num = 0;
-                        int resultado = evaluarResultadoCuadrado(juegocuadradoMagico, fila, col, num); //Se mandda a llamar el método para poder usar el siguiente if y asignar los puntos
+			    //Se escriben las variables para que permita devolver corrextamente las variables
+			    int resultado = evaluarResultadoCuadrado(juegocuadradoMagico); //Se mandda a llamar el método para poder usar el siguiente if y asignar los puntos
         
-			//Asignar puntos basados en el resultado
-			if (resultado == 1) { //Da 10pts si el jugador ganó
-			    jugadorActual.agregarPuntos(10);
-			    System.out.println("Has ganado: 10 puntos");
-			} else {
-			    jugadorActual.agregarPuntos(2); //si el jugador no ganó nada más devuelve 2
-			    System.out.println("Has ganado: 2 puntos");
-			} 
+			    //Asignar puntos basados en el resultado
+			    if (resultado == 1) { //Da 10pts si el jugador ganó
+				jugadorActual.agregarPuntos(10);
+				System.out.println("Has ganado: 10 puntos");
+			    } else {
+				jugadorActual.agregarPuntos(2); //si el jugador no ganó nada más devuelve 2
+				System.out.println("Has ganado: 2 puntos");
+			    } 
                     
-			archivo2 = null;
-			try {
-			    archivo2 = new ObjectOutputStream(new FileOutputStream("jugadores.txt"));
-			    archivo2.writeObject(players);
-			} catch (IOException e) {
-			    System.out.println("Error al guardar los datos: " + e.getMessage());
-			} finally {
-			    if (archivo2 != null) {
-				try {
-				    archivo2.close();
-				} catch (IOException e) {
-				    System.out.println("Error al cerrar el archivo: " + e.getMessage());
+			    archivo2 = null;
+			    try {
+				archivo2 = new ObjectOutputStream(new FileOutputStream("jugadores.txt"));
+				archivo2.writeObject(players);
+			    } catch (IOException e) {
+				System.out.println("Error al guardar los datos: " + e.getMessage());
+			    } finally {
+				if (archivo2 != null) {
+				    try {
+					archivo2.close();
+				    } catch (IOException e) {
+					System.out.println("Error al cerrar el archivo: " + e.getMessage());
+				    }
 				}
 			    }
-			}
 
-			//muestra la posición, puntos y créditos
-			System.out.println("Tus puntos actuales son: " + jugadorActual.obtenerPuntos());
-			System.out.println("Ya solo tienes " + jugadorActual.obtenerCreditos() + " creditos");
-			//Aqui va a checar que la posicion 2 sea diferente de nulo
-			//Porque si solo hay un jugador, siempre sera el primero 
-			if (players[1] == null) {
-			    System.out.println(cadena);
-			    System.out.println("Estas en la posicion 1 con " + jugadorActual.obtenerPuntos() + " puntos");
-			    System.out.println(cadena);
-			} else {
-			    System.out.println(cadena);
-			    System.out.println("Posiciones");
-			    System.out.println(cadena);
-			    jugador.posiciones(players);
-			    System.out.println(cadena);
-			}
+			    //muestra la posición, puntos y créditos
+			    System.out.println("Tus puntos actuales son: " + jugadorActual.obtenerPuntos());
+			    System.out.println("Ya solo tienes " + jugadorActual.obtenerCreditos() + " creditos");
+			    //Aqui va a checar que la posicion 2 sea diferente de nulo
+			    //Porque si solo hay un jugador, siempre sera el primero 
+			    if (players[1] == null) {
+				System.out.println(cadena);
+				System.out.println("Estas en la posicion 1 con " + jugadorActual.obtenerPuntos() + " puntos");
+				System.out.println(cadena);
+			    } else {
+				System.out.println(cadena);
+				System.out.println("Posiciones");
+				System.out.println(cadena);
+				jugador.posiciones(players);
+				System.out.println(cadena);
+			    }
 								
-			break;
+			    break;
 
-			//Conecta 4
-		    case 2:  
-			conecta4 juegoConecta4 = new conecta4();
-			main.main(new String[]{}); //Se llama al main de conecta4 para que se muestre todo el menú creado
-			char jugadorActual1 = 'O';
-			char resultado1 = juegoConecta4.ganador();
-			int resultadow = evaluarResultadoConecta4(resultado1, jugadorActual);
+			    //Conecta 4
+			case 2:  
+			    conecta4 juegoConecta4 = new conecta4();
+			    main.main(new String[]{}); //Se llama al main de conecta4 para que se muestre todo el menú creado
+			
+			    int resultadow = evaluarResultadoConecta4(juegoConecta4);
 
-			if (resultado1 == 1){
-			    jugadorActual.agregarPuntos(15);
-			    System.out.println("Has ganado: 15 puntos");
-			} else if (resultado1 == 2){
-			    jugadorActual.agregarPuntos(5);
-			    System.out.println("Has ganado: 5 puntos");
-			} else {
-			    jugadorActual.agregarPuntos(2);
-			    System.out.println("Has ganado: 2 puntos");
-			}
-                      
-		        System.out.println("Tus puntos actuales son: " + jugadorActual.obtenerPuntos());
-			System.out.println("Ya solo tienes " + jugadorActual.obtenerCreditos() + " creditos");
-			//Aqui va a checar que la posicion 2 sea diferente de nulo
-			//Porque si solo hay un jugador, siempre sera el primero 
-			if (players[1] == null) {
-			    System.out.println(cadena);
-			    System.out.println("Estas en la posicion 1 con " + jugadorActual.obtenerPuntos() + " puntos");
-			    System.out.println(cadena);
-			} else {
-			    System.out.println(cadena);
-			    System.out.println("Posiciones");
-			    System.out.println(cadena);
-			    jugador.posiciones(players);
-			    System.out.println(cadena);
-			}				
-						
-			archivo2 = null;
-			try {
-			    archivo2 = new ObjectOutputStream(new FileOutputStream("jugadores.txt"));
-			    archivo2.writeObject(players);
-			} catch (IOException e) {
-			    System.out.println("Error al guardar los datos: " + e.getMessage());
-			} finally {
-			    if (archivo2 != null) {
-				try {
-				    archivo2.close();
-				} catch (IOException e) {
-				    System.out.println("Error al cerrar el archivo: " + e.getMessage());
-				}
+			    if (resultadow == 1){
+				jugadorActual.agregarPuntos(15);
+				System.out.println("Has ganado: 15 puntos");
+			    } else if (resultadow == 2){
+				jugadorActual.agregarPuntos(5);
+				System.out.println("Has ganado: 5 puntos");
+			    } else {
+				jugadorActual.agregarPuntos(2);
+				System.out.println("Has ganado: 2 puntos");
 			    }
-			}        
+                      
+			    System.out.println("Tus puntos actuales son: " + jugadorActual.obtenerPuntos());
+			    System.out.println("Ya solo tienes " + jugadorActual.obtenerCreditos() + " creditos");
+			    //Aqui va a checar que la posicion 2 sea diferente de nulo
+			    //Porque si solo hay un jugador, siempre sera el primero 
+			    if (players[1] == null) {
+				System.out.println(cadena);
+				System.out.println("Estas en la posicion 1 con " + jugadorActual.obtenerPuntos() + " puntos");
+				System.out.println(cadena);
+			    } else {
+				System.out.println(cadena);
+				System.out.println("Posiciones");
+				System.out.println(cadena);
+				jugador.posiciones(players);
+				System.out.println(cadena);
+			    }				
+						
+			    archivo2 = null;
+			    try {
+				archivo2 = new ObjectOutputStream(new FileOutputStream("jugadores.txt"));
+				archivo2.writeObject(players);
+			    } catch (IOException e) {
+				System.out.println("Error al guardar los datos: " + e.getMessage());
+			    } finally {
+				if (archivo2 != null) {
+				    try {
+					archivo2.close();
+				    } catch (IOException e) {
+					System.out.println("Error al cerrar el archivo: " + e.getMessage());
+				    }
+				}
+			    }        
                          
+			}
+			
 		    }
+                        
 		} else {
 		    System.out.println("Qué juego deseas jugar?");
 		    System.out.println("1. Salvado");
@@ -426,103 +421,107 @@ public class menu{
 			System.out.println("Lo siento, no tienes créditos para jugar algún juego");
 		    } else {
 			jugadorActual.cobro();
+			System.out.println(cadena);
 			System.out.println("Disfruta tu juego :).");
-		    }
+			System.out.println(cadena);
 
-		    //Juegos del día dos
-		    switch (juego) {
-		    case 1:
-			Salvados juegoSalvados = new Salvados(jugadorActual.obtenerNombre());
-			MainSalvados.main(new String[]{});//Se llama al main de Salvados para que se muestre todo el menú creado
-			//Se escriben las variables para que menu pueda tener acceso a ellas y las identifique
-			int adivina = scanner.nextInt();
-			int adivinaS = scanner.nextInt(adivina); 
-			int ultimaSilla = juegoSalvados.obtenerUltimaSilla();
+			//Juegos del día dos
+			switch (juego) {
+			case 1:
+			    Salvados juegoSalvados = new Salvados(jugadorActual.obtenerNombre());
+			    MainSalvados.main(new String[]{});//Se llama al main de Salvados para que se muestre todo el menú creado
+			    //Se escriben las variables para que menu pueda tener acceso a ellas y las identifique
+			    int res = 0;
+			
+			    int ultimaSilla = juegoSalvados.obtenerUltimaSilla();
                                 
-			int resultado = evaluarResultadoSalvados(adivina, ultimaSilla); //Evalúa los resultados para asignar lospuntos
+			    int resultado = evaluarResultadoSalvados(res, ultimaSilla); //Evalúa los resultados para asignar lospuntos
 
-			if (resultado == 1) {
-			    jugadorActual.agregarPuntos(12);  //Si el jugador ganó le da 12 pts
-			    System.out.println("Has ganado 12 puntos");
-			} else {
-			    jugadorActual.agregarPuntos(2);  //Si el jugador no ganó solo le da 2 pts
-			    System.out.println("Has ganado 2 puntos");
-			} 
-			System.out.println("Tus puntos actuales son: " + jugadorActual.obtenerPuntos());
-			System.out.println("Ya solo tienes " + jugadorActual.obtenerCreditos() + " creditos");
-			//Aqui va a checar que la posicion 2 sea diferente de nulo
-			//Porque si solo hay un jugador, siempre sera el primero 
-			if (players[1] == null) {
-			    System.out.println(cadena);
-			    System.out.println("Estas en la posicion 1 con " + jugadorActual.obtenerPuntos() + " puntos");
-			    System.out.println(cadena);
-			} else {
-			    System.out.println(cadena);
-			    System.out.println("Posiciones");
-			    System.out.println(cadena);
-			    jugador.posiciones(players);
-			    System.out.println(cadena);
-			}					
+			    if (resultado == 1) {
+				jugadorActual.agregarPuntos(12);  //Si el jugador ganó le da 12 pts
+				System.out.println("Has ganado 12 puntos");
+			    } else {
+				jugadorActual.agregarPuntos(2);  //Si el jugador no ganó solo le da 2 pts
+				System.out.println("Has ganado 2 puntos");
+			    } 
+			    System.out.println("Tus puntos actuales son: " + jugadorActual.obtenerPuntos());
+			    System.out.println("Ya solo tienes " + jugadorActual.obtenerCreditos() + " creditos");
+			    //Aqui va a checar que la posicion 2 sea diferente de nulo
+			    //Porque si solo hay un jugador, siempre sera el primero 
+			    if (players[1] == null) {
+				System.out.println(cadena);
+				System.out.println("Estas en la posicion 1 con " + jugadorActual.obtenerPuntos() + " puntos");
+				System.out.println(cadena);
+			    } else {
+				System.out.println(cadena);
+				System.out.println("Posiciones");
+				System.out.println(cadena);
+				jugador.posiciones(players);
+				System.out.println(cadena);
+			    }					
 						
-			archivo2 = null;
-			try {
-			    archivo2 = new ObjectOutputStream(new FileOutputStream("jugadores.txt"));
-			    archivo2.writeObject(players);
-			} catch (IOException e) {
-			    System.out.println("Error al guardar los datos: " + e.getMessage());
-			} finally {
-			    if (archivo2 != null) {
-				try {
-				    archivo2.close();
-				} catch (IOException e) {
-				    System.out.println("Error al cerrar el archivo: " + e.getMessage());
+			    archivo2 = null;
+			    try {
+				archivo2 = new ObjectOutputStream(new FileOutputStream("jugadores.txt"));
+				archivo2.writeObject(players);
+			    } catch (IOException e) {
+				System.out.println("Error al guardar los datos: " + e.getMessage());
+			    } finally {
+				if (archivo2 != null) {
+				    try {
+					archivo2.close();
+				    } catch (IOException e) {
+					System.out.println("Error al cerrar el archivo: " + e.getMessage());
+				    }
 				}
-			    }
-			}								
-			break;
+			    }								
+			    break;
 
-		    case 2: // Torres de Hanoi
+			case 2: // Torres de Hanoi
                              
 			 
-			Hanoi seguirJugandoHanoi = new Hanoi("\n");
-			mainHanoi.main(new String[]{});
-			 //Prueba para que se den los puntos en el Hanoi.
-			 String resultado1 = "0";
-			 int resultado1Int = Integer.parseInt(resultado1);
-			 int numD = 6;
-			 int movimientos = Hanoi.movimientosMin(numD, 1, 2, 3); // Inicializamos la variable movimientos
-			 int movimientosMinimos = Hanoi.movimientosMin(6, 1, 2, 3);  // Suponiendo que este método retorna el mínimo de movimientos
-			 int resultadoH = evaluarResultadoHanoi(movimientos, resultado1Int, movimientosMinimos);
+			    Hanoi seguirJugandoHanoi = new Hanoi("\n");
+			    mainHanoi.main(new String[]{});
+			    //Prueba para que se den los puntos en el Hanoi.
+			    String resultado1 = "0";
+			    int resultado1Int = Integer.parseInt(resultado1);
+			    int numD = 6;
+			    int movimientos = Hanoi.movimientosMin(numD, 1, 2, 3); // Inicializamos la variable movimientos
+			    int movimientosMinimos = Hanoi.movimientosMin(6, 1, 2, 3);  // Suponiendo que este método retorna el mínimo de movimientos
+			    int resultadoH = evaluarResultadoHanoi(movimientos, resultado1Int, movimientosMinimos);
 			
-			if(movimientos == 1){
+			    if(movimientos == 1){
 				jugadorActual.agregarPuntos(15);
 				System.out.println("Has ganado 15 puntos");
-			} else if (movimientos == 2){
+			    } else if (movimientos == 2){
 				jugadorActual.agregarPuntos(10);
 				System.out.println("Has ganado 10 puntos");
 
-			} else {
+			    } else {
 				jugadorActual.agregarPuntos(2);
 				System.out.println("Has ganado 2 puntos");
 
-			}
+			    }
 		
-			System.out.println("\n Has ganado " + jugadorActual.obtenerPuntos() + " \n Tus puntos actuales son: " + jugadorActual.obtenerPuntos() + "\n Ya solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
+			    System.out.println("\n Has ganado " + jugadorActual.obtenerPuntos() + " \n Tus puntos actuales son: " + jugadorActual.obtenerPuntos() + "\n Ya solo tienes " + jugadorActual.obtenerCreditos() + " créditos");
 
-			if (players[1] == null) {
-			    System.out.println(cadena);
-			    System.out.println("Estas en la posicion 1 con " + jugadorActual.obtenerPuntos() + " puntos");
-			    System.out.println(cadena);
-			} else {
-			    System.out.println(cadena);
-			    System.out.println("Posiciones");
-			    System.out.println(cadena);
-			    jugador.posiciones(players);
-			    System.out.println(cadena);
-			}
+			    if (players[1] == null) {
+				System.out.println(cadena);
+				System.out.println("Estas en la posicion 1 con " + jugadorActual.obtenerPuntos() + " puntos");
+				System.out.println(cadena);
+			    } else {
+				System.out.println(cadena);
+				System.out.println("Posiciones");
+				System.out.println(cadena);
+				jugador.posiciones(players);
+				System.out.println(cadena);
+			    }
 			}  
 			
+		    }
+
 		}
+
 		break;
 
                 //Mejores 3 puntajes
@@ -565,15 +564,13 @@ public class menu{
 		System.out.println("Has decidido cambiar de día.");
 		dia = -1; //vuelve a pedile al jugador que vuelva a seleccionae el
 		System.out.println(cadena);
-		while (dia != 1 && dia != 2 && dia != 3) {
+		while (dia != 1 && dia != 2) {
 		    try {
 			System.out.println(cadena);
 			System.out.println("Por favor, indica qué día quieres jugar");
 			System.out.println(cadena);
 			System.out.println("1. Día uno");
 			System.out.println("2. Día dos");
-			System.out.println("3. Día tres");
-			System.out.println(cadena);
 
 			dia = scanner.nextInt(); // Lee la opción del día
 

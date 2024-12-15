@@ -14,8 +14,9 @@ public class cuadradoMagico {
     //La forma para obtener la constante magica es a traves de la formula n(n^2 + 1)/2, con n el numero de filas  
     int constanteMagica = 34;
 
-    /*CONSTRUCTOR*/
-    //El constructor de siempre que crea el cuadraadoMagico con valores nulos en un inicio 
+    /**
+     * Constructor que crea un arreglo de enteros de 4 por 4
+     */
     public cuadradoMagico() {
 	for(int i = 0; i<cuadrado.length; i++){
 	    for(int j = 0; j<cuadrado[i].length; j++){
@@ -24,8 +25,11 @@ public class cuadradoMagico {
 	}
     }
 
-    /*TOSTRING*/ 
-    //Una caja con cada espacio del arreglo
+    /**
+     * Metodo mostrarTablero que imprime en pantalla el tablero con todas las posiciones y su contenido
+     *
+     * @return tabler - Un String que es la representacion de un tablero 
+     */
     public String mostrarTablero() {
 	String tablero = "   | 0 | 1 | 2 | 3 |\n";
 	String guionSup = "   _________________\n";
@@ -41,15 +45,13 @@ public class cuadradoMagico {
 	return tablero += guionInf;
     }
 	
-	
-    /*METODOS*/
-    
-    /*colocar (boolean)*/
-    //* Que cheque si el movimiento esta dentro del 4x4 
-    //* Que cheque que el numero no este ya en el arreglo 
-    //* Que cheque que en esa casilla no haya otro numero
-    //* Que cheque que sea un numero entre 1-16
 
+    /**
+     * Metodo colocar que regresa un booleano que indica si un movimiento es posible o no
+     *
+     * @return false - Si el movimiento no es posible 
+     * @return true - Si el movimiento si es posible 
+     */
     public boolean colocar(int col, int fil, int num) {
 	if(col >= 0 && col <= 3 && fil >= 0 && fil <= 3) {
 	    if(cuadrado[col][fil] == 0){
@@ -69,10 +71,9 @@ public class cuadradoMagico {
 	return false;
     }
 
-    /*colocarAleatorio (void)*/
-    //Primero que tire un numero entre el 1 y el 8 para que caiga en 8 opcione, luego que genere 3 numeros entre el 1 y
-    //el 16 para definir toda la columna o fila o diagonal
-    //Metodo que llene una columna fila o diagonal con la cual se inicia el juego
+    /**
+     * Metodo colocarAleatorio que coloca una fila, columna o diagonal con numeros aleatorios que suman 34 y no se repiten
+     */
     public void colocarAleatorio() {
 	Random random = new Random();
 	
@@ -174,8 +175,9 @@ public class cuadradoMagico {
 	}
     }
 
-    /*suma (boolean)*/
-    //Metodo para que cheque que la suma de los elementos de las columnas, filas y diagonales sean iguales
+    /**
+     * Metodo suma que verifica si todas las columnas, filas y diagonales suman lo mismo 
+     */
     public boolean suma() {
 	//Primer vertical
 	int resultado1 = cuadrado[0][0] + cuadrado[0][1] + cuadrado[0][2] + cuadrado[0][3];
@@ -202,9 +204,13 @@ public class cuadradoMagico {
 	    return true;
 	} return false;
     }
-    
-    /*finJuego (boolean)*/
-    //Primero que cheque que todas sena diferentes de 0 y luego que vea si la suma es igual a 34 
+
+    /**
+     * Metodo finJuego que verifica si un juego ha terminado
+     *
+     * @return true - Si se completa alguna fila columna o diagonal que no sume 34
+     * @return true - Si no se cumple lo anterior 
+     */
     public boolean finJuego() {
 	if(this.suma()) {
 	    return true;
@@ -272,6 +278,12 @@ public class cuadradoMagico {
 	return false;
     }
 
+    /**
+     * Metodo tableroLLeno que verifica si el tablero se ha llenado, es decir, si todos los espacios son diferentes de 0
+     *
+     * @return false - Si se encuentra un espacio igual a 0
+     * @return true - Si todo el tablero es diferente a 0
+     */
     public boolean tableroLLeno() {
 	for(int i = 0; i < cuadrado.length; i++){
 	    for(int j = 0; j < cuadrado[i].length; j++){
@@ -283,6 +295,9 @@ public class cuadradoMagico {
 	return true;
     }
 
+    /**
+     * Metodo limpiar que restablece todos los valores del arreglo iguales a 0
+     */
     public void limpiar() {
 	for(int i = 0; i < cuadrado.length; i++) {
 	    for(int j = 0; j < cuadrado[i].length; j++){
